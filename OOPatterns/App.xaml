@@ -1,7 +1,7 @@
-﻿<Application x:Class="OOPaterns.App"
+﻿<Application x:Class="OOPatterns.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:OOPaterns"
+             xmlns:local="clr-namespace:OOPatterns"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

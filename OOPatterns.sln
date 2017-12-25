@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOPaterns", "OOPaterns\OOPaterns.csproj", "{37DFD2D2-7AB9-4A58-8CED-0316CE05F9F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOPatterns", "OOPatterns\OOPatterns.csproj", "{4F58D640-0A29-477A-8F8F-177EBA1C9305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{37DFD2D2-7AB9-4A58-8CED-0316CE05F9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37DFD2D2-7AB9-4A58-8CED-0316CE05F9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37DFD2D2-7AB9-4A58-8CED-0316CE05F9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37DFD2D2-7AB9-4A58-8CED-0316CE05F9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F58D640-0A29-477A-8F8F-177EBA1C9305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F58D640-0A29-477A-8F8F-177EBA1C9305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F58D640-0A29-477A-8F8F-177EBA1C9305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F58D640-0A29-477A-8F8F-177EBA1C9305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1E0888E9-448B-49EF-B1BB-974331280909}
+		SolutionGuid = {29C25892-D7A0-43CD-BB05-6FFFD8E47BD0}
 	EndGlobalSection
 EndGlobal

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OOPaterns.Properties
+namespace OOPatterns.Properties
 {
 
 
