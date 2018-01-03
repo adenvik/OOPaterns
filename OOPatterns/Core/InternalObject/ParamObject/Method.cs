@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOPatterns.Core.Utils.Type;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,13 @@ namespace OOPatterns.Core.InternalObject.ParamObject
             Variables = new List<Variable>();
         }
 
-        public Method(int Type, string Name) : this()
+        public Method(TypeObject Type, string Name) : this()
         {
             TypeObject = Type;
             NameObject = Name;
         }
 
-        public Method(int Access, int Type, string Name) : this(Type, Name)
+        public Method(int Access, TypeObject Type, string Name) : this(Type, Name)
         {
             AccessObject = Access;
         }
@@ -43,6 +44,18 @@ namespace OOPatterns.Core.InternalObject.ParamObject
             {
                 Variables.RemoveAt(index);
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Method m)
+            {
+                if (NameObject == m.NameObject && Variables.Count == m.Variables.Count)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

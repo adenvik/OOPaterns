@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOPatterns.Core.Utils.Type;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,27 @@ namespace OOPatterns.Core.InternalObject.ParamObject
 {
     class Variable : IParamObject
     {
-        public Variable(int Type, string Name)
+        public Variable(TypeObject Type, string Name)
         {
             TypeObject = Type;
             NameObject = Name;
         }
 
-        public Variable(int Access, int Type, string Name) : this(Type, Name)
+        public Variable(int Access, TypeObject Type, string Name) : this(Type, Name)
         {
             AccessObject = Access;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Variable v)
+            {
+                if (NameObject == v.NameObject)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

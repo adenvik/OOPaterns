@@ -1,6 +1,5 @@
 ﻿using OOPatterns.Core.Utils.Modificators;
-using OOPatterns.Core.Utils.Modificators.CSharp;
-using OOPatterns.Core.Utils.Type.FactoryMethod;
+using OOPatterns.Core.Utils.Type;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +13,7 @@ namespace OOPatterns.Core.InternalObject
         public static int CSHARP = 0;
         public static int JAVA = 1;
 
-
-        public TypeFactory TypeFactory { get; }
-        public Access Access { get; }
-
+        Utils.Type.Type type;
 
         public Creator(int language)
         {
@@ -25,12 +21,11 @@ namespace OOPatterns.Core.InternalObject
             {
                 case 1:
                     //TO DO
-                case 2:
-                    //TO DO
-                default:
+                    type = new Utils.Type.Type(TypeInitializer.Language.Java);
+                    break;
                 case 0:
-                    TypeFactory = new CSharpTypeFactory();
-                    Access = new CSharpAccess();
+                default:
+                    type = new Utils.Type.Type();
                     break;
             }
         }

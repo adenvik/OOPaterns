@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.Utils.Modificators
 {
-    abstract class Access
+    class Access
     {
         public static int PUBLIC = 0;
         public static int PROTECTED = 1;
         public static int PRIVATE = 2;
+
+        public string[] GetAccess()
+        {
+            return new[] { "public", "protected", "private" };
+        }
     }
 }

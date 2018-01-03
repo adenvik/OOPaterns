@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPatterns.Core.Utils.Type
+namespace OOPatterns.Core.VisualObject
 {
-    abstract class MethodType : Type, IMethodType
+    interface IVisualObject
     {
-        
+        void MoveTo(Layer layer);
+        void Draw();
     }
 }

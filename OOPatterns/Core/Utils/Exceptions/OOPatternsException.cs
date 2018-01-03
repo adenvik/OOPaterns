@@ -8,5 +8,6 @@ namespace OOPatterns.Core.Utils.Exceptions
 {
     class OOPatternsException : Exception
     {
+
     }
 }

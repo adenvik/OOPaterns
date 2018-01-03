@@ -74,19 +74,13 @@
     <Compile Include="Core\Utils\Log\ILoggable.cs" />
     <Compile Include="Core\Utils\Log\Logger.cs" />
     <Compile Include="Core\Utils\Modificators\Access.cs" />
-    <Compile Include="Core\Utils\Modificators\CSharp\CSharpAccess.cs" />
     <Compile Include="Core\Utils\Name\SystemName.cs" />
-    <Compile Include="Core\Utils\Type\CSharp\CSharpMethodType.cs" />
-    <Compile Include="Core\Utils\Type\CSharp\CSharpType.cs" />
-    <Compile Include="Core\Utils\Type\CSharp\CSharpVariableType.cs" />
-    <Compile Include="Core\Utils\Type\FactoryMethod\CSharpTypeFactory.cs" />
-    <Compile Include="Core\Utils\Type\FactoryMethod\TypeFactory.cs" />
-    <Compile Include="Core\Utils\Type\IMethodType.cs" />
     <Compile Include="Core\Utils\Type\IType.cs" />
-    <Compile Include="Core\Utils\Type\IVariableType.cs" />
-    <Compile Include="Core\Utils\Type\MethodType.cs" />
     <Compile Include="Core\Utils\Type\Type.cs" />
-    <Compile Include="Core\Utils\Type\VariableType.cs" />
+    <Compile Include="Core\Utils\Type\TypeInitializer.cs" />
+    <Compile Include="Core\Utils\Type\TypeObject.cs" />
+    <Compile Include="Core\VisualObject\IVisualObject.cs" />
+    <Compile Include="Core\VisualObject\Layer.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -118,8 +112,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\VisualObject\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
