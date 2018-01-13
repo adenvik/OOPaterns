@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.InternalObject.UserType
 {
-    class Structure : IUserType
+    class Structure
     {
+
     }
 }

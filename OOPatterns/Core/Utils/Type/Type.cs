@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.Utils.Type
 {
-    class Type : IType
+    public class Type : IType
     {
         List<TypeObject> types;
 
@@ -23,6 +23,7 @@ namespace OOPatterns.Core.Utils.Type
 
         public Type(TypeInitializer.Language language = TypeInitializer.Language.CSharp)
         {
+            types = new List<TypeObject>();
             new TypeInitializer(types, language);
         }
 

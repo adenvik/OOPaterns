@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.Utils.Type
 {
-    class TypeInitializer
+    public class TypeInitializer
     {
         public enum Language
         {

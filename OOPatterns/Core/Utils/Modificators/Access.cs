@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.Utils.Modificators
 {
-    class Access
+    public class Access
     {
-        public static int PUBLIC = 0;
-        public static int PROTECTED = 1;
-        public static int PRIVATE = 2;
+        public static string PUBLIC = "public";
+        public static string PROTECTED = "protected";
+        public static string PRIVATE = "private";
 
-        public string[] GetAccess()
+        public List<string> GetAccess()
         {
-            return new[] { "public", "protected", "private" };
+            return new List<string>() {PUBLIC, PROTECTED, PRIVATE};
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOPatterns.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace OOPatterns
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void configurationButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserTypeConfigurationWindow w = new UserTypeConfigurationWindow();
+            w.ShowDialog();
         }
     }
 }

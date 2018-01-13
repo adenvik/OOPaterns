@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.InternalObject.ParamObject
 {
-    class Variable : IParamObject
+    public class Variable : IParamObject
     {
         public Variable(TypeObject Type, string Name)
         {
@@ -15,7 +15,7 @@ namespace OOPatterns.Core.InternalObject.ParamObject
             NameObject = Name;
         }
 
-        public Variable(int Access, TypeObject Type, string Name) : this(Type, Name)
+        public Variable(string Access, TypeObject Type, string Name) : this(Type, Name)
         {
             AccessObject = Access;
         }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.InternalObject.ParamObject
 {
-    abstract class IParamObject
+    public abstract class IParamObject
     {
-        public int AccessObject { set; get; }
+        public string AccessObject { set; get; }
         public TypeObject TypeObject { set; get; }
         public string NameObject { set; get; }
 

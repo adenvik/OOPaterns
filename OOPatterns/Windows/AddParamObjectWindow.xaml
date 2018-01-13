@@ -1,0 +1,26 @@
+﻿<Window x:Class="OOPatterns.Windows.AddParamObjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOPatterns.Windows"
+        mc:Ignorable="d"
+        Title="Добавление объекта" Height="165" Width="255"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel>
+            <Grid Name="Access_Control" Margin="0,8,0,0">
+                <Label Content="Модификатор доступа" HorizontalAlignment="Left" Margin="12,4,0,0" VerticalAlignment="Top" Name="Access_Label"/>
+                <ComboBox HorizontalAlignment="Left" Margin="146,7,0,0" VerticalAlignment="Top" Width="85" Name="Access_CB"/>
+            </Grid>
+            <Grid Name="Others_Control">
+                <Label Content="Тип" HorizontalAlignment="Left" Margin="12,4,0,0" VerticalAlignment="Top"/>
+                <Label Content="Название" HorizontalAlignment="Left" Margin="12,32,0,0" VerticalAlignment="Top"/>
+                <ComboBox HorizontalAlignment="Left" Margin="80,4,0,0" VerticalAlignment="Top" Width="151" Height="23" IsEditable="True" Name="Type_CB"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="80,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" Name="Name_TB"/>
+                <Button Content="Добавить" HorizontalAlignment="Left" Margin="18,60,0,0" VerticalAlignment="Top" Width="213" Height="23" Name="AddButton" Click="AddButton_Click"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

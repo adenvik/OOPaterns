@@ -118,49 +118,49 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="access" xml:space="preserve">
-    <value>Access modificator</value>
+    <value>Модификатор доступа</value>
   </data>
   <data name="add_method" xml:space="preserve">
-    <value>Add method</value>
+    <value>Добавить метод</value>
   </data>
   <data name="add_variable" xml:space="preserve">
-    <value>Add variable</value>
+    <value>Добавить переменную</value>
   </data>
   <data name="delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Удалить</value>
   </data>
   <data name="methods" xml:space="preserve">
-    <value>Methods</value>
+    <value>Методы</value>
   </data>
   <data name="method_variables" xml:space="preserve">
-    <value>Method variables</value>
+    <value>Переменные метода</value>
   </data>
   <data name="name" xml:space="preserve">
-    <value>Name</value>
+    <value>Название</value>
   </data>
   <data name="object_info" xml:space="preserve">
-    <value>Object information</value>
+    <value>Информация об объкте</value>
   </data>
   <data name="object_type" xml:space="preserve">
-    <value>Object type</value>
+    <value>Тип объекта</value>
   </data>
   <data name="parent_obj" xml:space="preserve">
-    <value>Parent object</value>
+    <value>Род. объект</value>
   </data>
   <data name="save_object_question" xml:space="preserve">
-    <value>Save object?</value>
+    <value>Сохранить объект?</value>
   </data>
   <data name="type" xml:space="preserve">
-    <value>Type</value>
+    <value>Тип</value>
   </data>
   <data name="userTypeConfigurationWindow_title" xml:space="preserve">
-    <value>Object configuration</value>
+    <value>Настройка объекта</value>
   </data>
   <data name="variables" xml:space="preserve">
-    <value>Variables</value>
+    <value>Переменные</value>
   </data>
   <data name="save_object_message" xml:space="preserve">
-    <value>Object will be deleted.
-Do you want to get out?</value>
+    <value>Объект будет удален!
+Вы хотите выйти?</value>
   </data>
 </root>

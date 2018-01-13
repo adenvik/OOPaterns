@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.Utils.Type
 {
-    class TypeObject
+    public class TypeObject
     {
         /// <summary>
         /// Название типа
