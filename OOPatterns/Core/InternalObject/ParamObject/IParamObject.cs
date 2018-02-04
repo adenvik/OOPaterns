@@ -13,6 +13,11 @@ namespace OOPatterns.Core.InternalObject.ParamObject
         public TypeObject TypeObject { set; get; }
         public string NameObject { set; get; }
 
+        public override string ToString()
+        {
+            return $"{AccessObject} {TypeObject.TypeInLanguage} {NameObject}";
+        }
+
         public abstract override bool Equals(object obj);
     }
 }

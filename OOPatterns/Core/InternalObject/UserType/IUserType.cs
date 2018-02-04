@@ -24,5 +24,7 @@ namespace OOPatterns.Core.InternalObject.UserType
         void RemoveMethod(Method method);
         Method GetMethod(int index);
         List<Method> GetMethods();
+
+        bool Equals(object obj);
     }
 }

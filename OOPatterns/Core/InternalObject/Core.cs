@@ -1,6 +1,7 @@
 ﻿using OOPatterns.Core.InternalObject.UserType;
 using OOPatterns.Core.Utils.Modificators;
 using OOPatterns.Core.Utils.Type;
+using OOPatterns.Core.VisualObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace OOPatterns.Core.InternalObject
         public const string CLASS = "class";
         public const string INTERFACE = "interface";
 
+        public const string CLASS_ICO_PATH = "pack://application:,,,/OOPatterns;component/Images/class_ico.png";        //"/OOPatterns;component/Images/class_ico.png";
+        public const string INTERFACE_ICO_PATH = "pack://application:,,,/OOPatterns;component/Images/interface_ico.png";//"/OOPatterns;component/Images/interface_ico.png";
+
         List<IUserType> objects;
+        List<IVisualObject> visualObjects;
 
         private static Core core = null;
         private static int currentLanguage = -1;
@@ -28,6 +33,7 @@ namespace OOPatterns.Core.InternalObject
         private Core(int language)
         {
             objects = new List<IUserType>();
+            visualObjects = new List<IVisualObject>();
 
             switch (language)
             {

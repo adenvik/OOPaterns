@@ -54,17 +54,18 @@ namespace OOPatterns.Core.InternalObject.UserType
         //--------------------------------------------
         public void AddVariable(Variable variable)
         {
-            throw new OOPatternsException();
+            //throw new OOPatternsException();
         }
 
         public void RemoveVariable(Variable variable)
         {
-            throw new OOPatternsException();
+            //throw new OOPatternsException();
         }
 
         public List<Variable> GetVariables()
         {
-            throw new OOPatternsException();
+            //throw new OOPatternsException();
+            return new List<Variable>();
         }
         //--------------------------------------------
         public void AddMethod(Method method)
@@ -85,6 +86,15 @@ namespace OOPatterns.Core.InternalObject.UserType
         public List<Method> GetMethods()
         {
             return methods;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Interface c)
+            {
+                if (Name.Equals(c.Name)) return true;
+            }
+            return false;
         }
     }
 }

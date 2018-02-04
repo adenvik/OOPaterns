@@ -46,6 +46,14 @@ namespace OOPatterns.Core.InternalObject.ParamObject
             }
         }
 
+        public override string ToString()
+        {
+            var result = base.ToString() + $"(";
+            Variables.ForEach(v => result += $"{v.TypeObject.TypeInLanguage} {v.NameObject},");
+            if (result.EndsWith(",")) result = result.Substring(0, result.Length - 1);
+            return $"{result})";
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is Method m)

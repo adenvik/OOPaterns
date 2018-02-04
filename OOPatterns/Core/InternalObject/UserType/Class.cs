@@ -87,5 +87,14 @@ namespace OOPatterns.Core.InternalObject.UserType
         {
             return methods;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Class c)
+            {
+                if (Name.Equals(c.Name)) return true;
+            }
+            return false;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using OOPatterns.Core.InternalObject.ParamObject;
 using OOPatterns.Core.InternalObject.UserType;
 using OOPatterns.Core.Utils.Modificators;
+using OOPatterns.Core.VisualObject;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,9 +28,10 @@ namespace OOPatterns.Windows
         Core.InternalObject.Core core;
         Access access;
         Core.Utils.Type.Type type;
-
-        private static string CLASS_ICO_PATH = "/OOPatterns;component/Images/class_ico.png";
-        private static string INTERFACE_ICO_PATH = "/OOPatterns;component/Images/interface_ico.png";
+        CanvasWorker canvasWorker;
+        
+        private const string CLASS_ICO_PATH = Core.InternalObject.Core.CLASS_ICO_PATH;        //"/OOPatterns;component/Images/class_ico.png";
+        private const string INTERFACE_ICO_PATH = Core.InternalObject.Core.INTERFACE_ICO_PATH;//"/OOPatterns;component/Images/interface_ico.png";
 
         IUserType obj;
 
@@ -56,6 +58,8 @@ namespace OOPatterns.Windows
                                                  addParamObjectWindow.Name_TB.Text);
                 obj.AddVariable(variable);
                 Variables_LB.Items.Add(variable);
+
+                canvasWorker.Draw();
             }
         }
 
@@ -69,6 +73,8 @@ namespace OOPatterns.Windows
                                            addParamObjectWindow.Name_TB.Text);
                 obj.AddMethod(method);
                 Methods_LB.Items.Add(method);
+
+                canvasWorker.Draw();
             }
         }
 
@@ -106,6 +112,8 @@ namespace OOPatterns.Windows
         /// </summary>
         private void Initialize()
         {
+            canvasWorker = new CanvasWorker().BindMainLayer(ElementView);
+
             core = Core.InternalObject.Core.GetInstance();
 
             type = core.Type;
@@ -126,10 +134,21 @@ namespace OOPatterns.Windows
                 Methods_GB.IsEnabled = false;
                 return;
             }
-            ParentObj_CB.Items.Remove(obj);
+            canvasWorker.AddElementToCenter(obj, obj is Class ? CLASS_ICO_PATH : INTERFACE_ICO_PATH);
 
+            ParentObj_CB.Items.Remove(obj);
+            
+            LoadParams();
+        }
+
+        private void LoadParams()
+        {
+            ParentsObj_LB.Items.Clear();
             List<IUserType> list = obj.GetParents();
             list.ForEach(item => ParentsObj_LB.Items.Add(item));
+
+            Variables_LB.Items.Clear();
+            Methods_LB.Items.Clear();
 
             obj.GetVariables().ForEach(item => Variables_LB.Items.Add(item));
             obj.GetMethods().ForEach(item => Methods_LB.Items.Add(item));
@@ -151,6 +170,8 @@ namespace OOPatterns.Windows
 
             obj.RemoveVariable((Variable)item);
             Variables_LB.Items.Remove(item);
+
+            canvasWorker.Draw();
         }
 
         private void DeleteMethodButton_Click(object sender, RoutedEventArgs e)
@@ -160,6 +181,8 @@ namespace OOPatterns.Windows
 
             obj.RemoveMethod((Method)item);
             Methods_LB.Items.Remove(item);
+
+            canvasWorker.Draw();
         }
 
         private void DeleteVariableInMethodButton_Click(object sender, RoutedEventArgs e)
@@ -170,6 +193,8 @@ namespace OOPatterns.Windows
 
             method.RemoveVariable((Variable)item);
             VariablesInMethod_LB.Items.Remove(item);
+
+            canvasWorker.Draw();
         }
 
         private void Methods_LB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -237,10 +262,14 @@ namespace OOPatterns.Windows
                 if (type == Core.InternalObject.Core.CLASS)
                 {
                     obj = new Class();
+                    obj.SetName(Name_TB.Text);
+                    canvasWorker.AddElementToCenter(obj, CLASS_ICO_PATH);
                 }
                 else
                 {
                     obj = new Interface();
+                    obj.SetName(Name_TB.Text);
+                    canvasWorker.AddElementToCenter(obj, INTERFACE_ICO_PATH);
                 }
                 return;
             }
@@ -248,15 +277,25 @@ namespace OOPatterns.Windows
             {
                 if (!ShowYesNoDialog("change", "to interface"))
                 {
+                    var oldObj = obj;
                     obj = new Interface(obj);
+                    obj.SetName(Name_TB.Text);
+                    LoadParams();
+                    canvasWorker.ReplaceElement(oldObj, obj, INTERFACE_ICO_PATH);
                 }
+                else TypeObj_CB.SelectedIndex = 0;
             }
             else if (obj is Interface && type == Core.InternalObject.Core.CLASS)
             {
                 if (!ShowYesNoDialog("change", "to class"))
                 {
+                    var oldObj = obj;
                     obj = new Class(obj);
+                    obj.SetName(Name_TB.Text);
+                    LoadParams();
+                    canvasWorker.ReplaceElement(oldObj, obj, CLASS_ICO_PATH);
                 }
+                else TypeObj_CB.SelectedIndex = 1;
             }
         }
 

@@ -56,7 +56,7 @@
                 <Button Content="{x:Static p:Resources.delete}" HorizontalAlignment="Left" Margin="168,13,0,0" VerticalAlignment="Top" Width="75" x:Name="DeleteMethodButton" Click="DeleteMethodButton_Click"/>
             </Grid>
         </GroupBox>
-        <Canvas HorizontalAlignment="Left" Height="443" Margin="546,11,0,0" VerticalAlignment="Top" Width="268" Background="LightGray"/>
+        <Canvas HorizontalAlignment="Left" Height="443" Margin="546,11,0,0" VerticalAlignment="Top" Width="268" Background="LightGray" Name="ElementView"/>
         <GroupBox Header="{x:Static p:Resources.object_info}" HorizontalAlignment="Left" Height="200" Margin="12,11,0,0" VerticalAlignment="Top" Width="254">
             <Grid>
                 <Label Content="{x:Static p:Resources.name}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
