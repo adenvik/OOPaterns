@@ -10,14 +10,15 @@ namespace OOPatterns.Core.InternalObject.UserType
 {
     class Interface : IUserType
     {
+        public const string ICO_PATH = "pack://application:,,,/OOPatterns;component/Images/interface_ico.png";
         public string Name { set; get; } = "";
 
-        List<Method> methods;
+        List<IParamObject> methods;
         List<IUserType> parents;
 
         public Interface()
         {
-            methods = new List<Method>();
+            methods = new List<IParamObject>();
             parents = new List<IUserType>();
         }
 
@@ -35,6 +36,11 @@ namespace OOPatterns.Core.InternalObject.UserType
         public string GetName()
         {
             return Name;
+        }
+
+        public string GetImagePath()
+        {
+            return ICO_PATH;
         }
 
         public void AddParentObj(IUserType parent)
@@ -62,10 +68,10 @@ namespace OOPatterns.Core.InternalObject.UserType
             //throw new OOPatternsException();
         }
 
-        public List<Variable> GetVariables()
+        public List<IParamObject> GetVariables()
         {
             //throw new OOPatternsException();
-            return new List<Variable>();
+            return new List<IParamObject>();
         }
         //--------------------------------------------
         public void AddMethod(Method method)
@@ -78,12 +84,12 @@ namespace OOPatterns.Core.InternalObject.UserType
             methods.Remove(method);
         }
 
-        public Method GetMethod(int index)
+        public IParamObject GetMethod(int index)
         {
             return methods[index];
         }
 
-        public List<Method> GetMethods()
+        public List<IParamObject> GetMethods()
         {
             return methods;
         }

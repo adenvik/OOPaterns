@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OOPatterns"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="530.333">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="362,56,0,0" VerticalAlignment="Top" Width="75" Name="configurationButton" Click="configurationButton_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="432,10,0,0" VerticalAlignment="Top" Width="75" Name="configurationButton" Click="configurationButton_Click"/>
+        <Canvas HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="417" Background="Silver" Name="ElementsView" MouseUp="ElementsView_MouseUp" MouseDown="ElementsView_MouseDown" MouseMove="ElementsView_MouseMove"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="432,44,0,0" VerticalAlignment="Top" Width="75" Name="State"/>
 
     </Grid>
 </Window>

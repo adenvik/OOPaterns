@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OOPatterns.Windows"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.userTypeConfigurationWindow_title}" Height="494" Width="829"
+        Title="{x:Static p:Resources.userTypeConfigurationWindow_title}" Height="497" Width="838"
         ResizeMode="NoResize"
         Closing="Window_Closing">
     <Grid>

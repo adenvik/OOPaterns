@@ -56,8 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\InternalObject\Core.cs" />
-    <Compile Include="Core\VisualObject\CanvasWorker.cs" />
-    <Compile Include="Core\VisualObject\VisualObject.cs" />
+    <Compile Include="Core\VisualObjects\CanvasWorker.cs" />
+    <Compile Include="Core\VisualObjects\VisualObject.cs" />
     <Compile Include="Properties\Resources.ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -97,8 +97,7 @@
     <Compile Include="Core\Utils\Type\Type.cs" />
     <Compile Include="Core\Utils\Type\TypeInitializer.cs" />
     <Compile Include="Core\Utils\Type\TypeObject.cs" />
-    <Compile Include="Core\VisualObject\IVisualObject.cs" />
-    <Compile Include="Core\VisualObject\Layer.cs" />
+    <Compile Include="Core\VisualObjects\IVisualObject.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

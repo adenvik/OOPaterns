@@ -1,7 +1,7 @@
 ﻿using OOPatterns.Core.InternalObject.UserType;
 using OOPatterns.Core.Utils.Modificators;
 using OOPatterns.Core.Utils.Type;
-using OOPatterns.Core.VisualObject;
+using OOPatterns.Core.VisualObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +14,6 @@ namespace OOPatterns.Core.InternalObject
     {
         public const string CLASS = "class";
         public const string INTERFACE = "interface";
-
-        public const string CLASS_ICO_PATH = "pack://application:,,,/OOPatterns;component/Images/class_ico.png";        //"/OOPatterns;component/Images/class_ico.png";
-        public const string INTERFACE_ICO_PATH = "pack://application:,,,/OOPatterns;component/Images/interface_ico.png";//"/OOPatterns;component/Images/interface_ico.png";
 
         List<IUserType> objects;
         List<IVisualObject> visualObjects;
@@ -56,9 +53,39 @@ namespace OOPatterns.Core.InternalObject
             return objects;
         }
 
+        public List<IVisualObject> GetVisualObjects()
+        {
+            return visualObjects;
+        }
+
         public void AddObject(IUserType obj)
         {
             objects.Add(obj);
+            visualObjects.Add(new VisualObject(obj));
+        }
+
+        public Tuple<IUserType, IVisualObject> GetObjectByName(string name)
+        {
+            var vObj = visualObjects.Find(obj => (obj as VisualObject).OBJECT_NAME == name);
+            return new Tuple<IUserType, IVisualObject>(vObj?.GetUserType(), vObj);
+        }
+
+        public Tuple<IUserType, IVisualObject> Last()
+        {
+            if (objects.Count == 0) return new Tuple<IUserType, IVisualObject>(null, null);
+            return new Tuple<IUserType, IVisualObject>(objects[objects.Count - 1], visualObjects[objects.Count - 1]);
+        }
+
+        public void Remove(IUserType userType)
+        {
+            int index = objects.FindIndex(obj => obj.Equals(userType));
+            objects.RemoveAt(index);
+            visualObjects.RemoveAt(index);
+        }
+
+        public IVisualObject GetVisualObject(IUserType userType)
+        {
+            return visualObjects[objects.FindIndex(obj => obj.Equals(userType))];
         }
 
         public static Core GetInstance(int language = -1)

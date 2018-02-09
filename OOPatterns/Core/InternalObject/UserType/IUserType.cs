@@ -12,18 +12,20 @@ namespace OOPatterns.Core.InternalObject.UserType
         void SetName(string name);
         string GetName();
 
+        string GetImagePath();
+
         void AddParentObj(IUserType parent);
         void RemoveParentObj(IUserType parent);
         List<IUserType> GetParents();
 
         void AddVariable(Variable variable);
         void RemoveVariable(Variable variable);
-        List<Variable> GetVariables();
+        List<IParamObject> GetVariables();
 
         void AddMethod(Method method);
         void RemoveMethod(Method method);
-        Method GetMethod(int index);
-        List<Method> GetMethods();
+        IParamObject GetMethod(int index);
+        List<IParamObject> GetMethods();
 
         bool Equals(object obj);
     }
