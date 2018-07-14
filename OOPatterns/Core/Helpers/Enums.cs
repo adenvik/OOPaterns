@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPatterns.Core.Utils.Name
+namespace OOPatterns.Core.Helpers
 {
-    abstract class SystemName
+    public class Enums
     {
-        public static bool Check(string name)
+        public enum Language
         {
-            return false;
+            CSHARP = 0,
+            JAVA = 1
         }
     }
 }

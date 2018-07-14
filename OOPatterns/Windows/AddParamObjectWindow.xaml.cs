@@ -1,18 +1,6 @@
-﻿using OOPatterns.Core.InternalObject;
-using OOPatterns.Core.Utils.Name;
-using System;
-using System.Collections.Generic;
+﻿using OOPatterns.Core.Helpers;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OOPatterns.Windows
 {
@@ -42,7 +30,7 @@ namespace OOPatterns.Windows
             string type = Type_CB.Text;
             string name = Name_TB.Text;
 
-            if (SystemName.Check(name))
+            if (!SystemName.Check(name))
             {
                 //MessageBox();
                 return;
@@ -55,10 +43,8 @@ namespace OOPatterns.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Core.InternalObject.Core core = Core.InternalObject.Core.GetInstance();
-
-            core.Access.GetAccess().ForEach(item => Access_CB.Items.Add(item));
-            core.Type.GetTypes().ForEach(item => Type_CB.Items.Add(item.TypeName));
+            Access.GetAccess().ToList().ForEach(item => Access_CB.Items.Add(item));
+            Core.Helpers.Type.GetTypes().ToList().ForEach(item => Type_CB.Items.Add(item));
 
             Access_CB.SelectedIndex = 0;
             Type_CB.SelectedIndex = 0;

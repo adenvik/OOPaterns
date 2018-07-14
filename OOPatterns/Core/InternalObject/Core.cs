@@ -1,12 +1,8 @@
-﻿using OOPatterns.Core.InternalObject.UserType;
-using OOPatterns.Core.Utils.Modificators;
-using OOPatterns.Core.Utils.Type;
+﻿using OOPatterns.Core.Utils.Log;
 using OOPatterns.Core.VisualObjects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static OOPatterns.Core.Helpers.Enums;
 
 namespace OOPatterns.Core.InternalObject
 {
@@ -14,8 +10,23 @@ namespace OOPatterns.Core.InternalObject
     {
         public const string CLASS = "class";
         public const string INTERFACE = "interface";
+        public ILoggable Logger { get; }
 
-        List<IUserType> objects;
+        public List<Element> Objects { get; set; } = new List<Element>();
+
+        private static Core core = null;
+
+        public void AddElement(Element element)
+        {
+            Objects.Add(element);
+        }
+
+        public static Core GetInstance()
+        {
+            return core ?? (core = new Core());
+        }
+        /*
+        List<UserType.UserType> objects;
         List<IVisualObject> visualObjects;
 
         private static Core core = null;
@@ -29,7 +40,7 @@ namespace OOPatterns.Core.InternalObject
 
         private Core(int language)
         {
-            objects = new List<IUserType>();
+            objects = new List<UserType.UserType>();
             visualObjects = new List<IVisualObject>();
 
             switch (language)
@@ -101,5 +112,6 @@ namespace OOPatterns.Core.InternalObject
             }
             return core;
         }
+        */
     }
 }

@@ -1,22 +1,12 @@
-﻿using OOPatterns.Core.InternalObject.ParamObject;
+﻿using OOPatterns.Core;
+using OOPatterns.Core.Helpers;
+using OOPatterns.Core.InternalObject.ParamObject;
 using OOPatterns.Core.InternalObject.UserType;
-using OOPatterns.Core.Utils.Modificators;
 using OOPatterns.Core.VisualObjects;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OOPatterns.Windows
 {
@@ -25,13 +15,9 @@ namespace OOPatterns.Windows
     /// </summary>
     public partial class UserTypeConfigurationWindow : Window
     {
-        Core.InternalObject.Core core;
-        Access access;
-        Core.Utils.Type.Type type;
-        CanvasWorker canvasWorker;
-
-        //IUserType obj;
-        Tuple<IUserType, IVisualObject> obj;
+        Core.Core core;
+        CanvasHelper canvasHelper;
+        Element element;
 
         public UserTypeConfigurationWindow()
         {
@@ -39,24 +25,27 @@ namespace OOPatterns.Windows
             Initialize();
         }
 
-        public UserTypeConfigurationWindow(Tuple<IUserType, IVisualObject> obj)
+        public UserTypeConfigurationWindow(Element element)
         {
             InitializeComponent();
-            this.obj = obj;
+            this.element = element;
             Initialize();
         }
 
         private void AddVariableButton_Click(object sender, RoutedEventArgs e)
         {
-            AddParamObjectWindow addParamObjectWindow = obj is Class ? ShowAddParamObjectWindow() : ShowAddParamObjectWindow(false);
+            AddParamObjectWindow addParamObjectWindow = element.UserObject is Class ? ShowAddParamObjectWindow() : ShowAddParamObjectWindow(false);
             if (addParamObjectWindow.isClosed)
             {
-                Variable variable = new Variable(addParamObjectWindow.Access_CB.Text,
-                                                 type[addParamObjectWindow.Type_CB.Text],
-                                                 addParamObjectWindow.Name_TB.Text);
-                obj.Item1.AddVariable(variable);
-                obj.Item2.UpdateFigure();
+                Variable variable = new Variable()
+                {
+                    Access = addParamObjectWindow.Access_CB.Text,
+                    Type = addParamObjectWindow.Type_CB.Text,
+                    Name = addParamObjectWindow.Name_TB.Text
+                };
+                (element.UserObject as Class).Variables.Add(variable);
                 Variables_LB.Items.Add(variable);
+                canvasHelper.ReDraw(element.VisualObject);
             }
         }
 
@@ -65,12 +54,15 @@ namespace OOPatterns.Windows
             AddParamObjectWindow addParamObjectWindow = ShowAddParamObjectWindow();
             if (addParamObjectWindow.isClosed)
             {
-                Method method = new Method(addParamObjectWindow.Access_CB.Text,
-                                           type[addParamObjectWindow.Type_CB.Text],
-                                           addParamObjectWindow.Name_TB.Text);
-                obj.Item1.AddMethod(method);
-                obj.Item2.UpdateFigure();
+                Method method = new Method()
+                {
+                    Access = addParamObjectWindow.Access_CB.Text,
+                    Type = addParamObjectWindow.Type_CB.Text,
+                    Name = addParamObjectWindow.Name_TB.Text
+                };
+                element.UserObject.Methods.Add(method);
                 Methods_LB.Items.Add(method);
+                canvasHelper.ReDraw(element.VisualObject);
             }
         }
 
@@ -79,18 +71,16 @@ namespace OOPatterns.Windows
             AddParamObjectWindow addParamObjectWindow = ShowAddParamObjectWindow();
             if (addParamObjectWindow.isClosed)
             {
-                Variable variable = new Variable(addParamObjectWindow.Access_CB.Text,
-                                                 type[addParamObjectWindow.Type_CB.Text],
-                                                 addParamObjectWindow.Name_TB.Text);
+                Variable variable = new Variable()
+                {
+                    Access = addParamObjectWindow.Access_CB.Text,
+                    Type = addParamObjectWindow.Type_CB.Text,
+                    Name = addParamObjectWindow.Name_TB.Text
+                };
 
-                /*Method method = null; //TODO: Получение текущего метода
-                dynamic currentMethod = Methods_LB.SelectedItem;
-                method.AccessObject = access[currentMethod.Access];
-                method.TypeObject = type[currentMethod.Type];*/
-                Method method = obj.Item1.GetMethod(Methods_LB.SelectedIndex) as Method;
-                method.AddVariable(variable);
-                obj.Item2.UpdateFigure();
-                VariablesInMethod_LB.Items.Add(variable);
+                var method = element.UserObject.Methods[Methods_LB.SelectedIndex] as Method;
+                method.Parameters.Add(variable);
+                canvasHelper.ReDraw(element.VisualObject);
             }
         }
 
@@ -109,46 +99,46 @@ namespace OOPatterns.Windows
         /// </summary>
         private void Initialize()
         {
-            canvasWorker = new CanvasWorker(ElementView);
+            canvasHelper = new CanvasHelper(ElementView);
+            core = Core.Core.GetInstance();
 
-            core = Core.InternalObject.Core.GetInstance();
-
-            type = core.Type;
-            access = core.Access;
-
-            new List<string>() { Core.InternalObject.Core.CLASS, Core.InternalObject.Core.INTERFACE }
+            new List<string>() { Core.Core.CLASS, Core.Core.INTERFACE }
                                 .ForEach(item => TypeObj_CB.Items.Add(item));
-            List<IUserType> objects = core.GetObjects();
+
+            var objects = core.Objects;
             if (objects.Count == 0) ParentObj_CB.IsEnabled = false;
-            objects.ForEach(item => ParentObj_CB.Items.Add(new {
-                ImagePath = (item is Class) ? Class.ICO_PATH : Interface.ICO_PATH,
-                Name = item.GetName()
+            objects.ForEach(item => ParentObj_CB.Items.Add(new
+            {
+                ImagePath = item.UserObject.ICO_PATH,
+                Name = item.UserObject.Name
             }));
 
-            if(obj == null)
+            if (element == null)
             {
                 Variables_GB.IsEnabled = false;
                 Methods_GB.IsEnabled = false;
                 return;
             }
-            canvasWorker.AddElement(obj.Item2);
 
-            ParentObj_CB.Items.Remove(obj);
-            
+            canvasHelper.Add(element.VisualObject, true);
+            ParentObj_CB.Items.RemoveAt(objects.FindIndex(o => o.Equals(element.UserObject)));
             LoadParams();
         }
 
         private void LoadParams()
         {
+            Name_TB.Text = element.UserObject.Name;
+            TypeObj_CB.SelectedIndex = (element.UserObject is Class) ? 0 : 1;
+
             ParentsObj_LB.Items.Clear();
-            List<IUserType> list = obj.Item1.GetParents();
+            List<UserType> list = element.UserObject.Parents;
             list.ForEach(item => ParentsObj_LB.Items.Add(item));
 
             Variables_LB.Items.Clear();
             Methods_LB.Items.Clear();
 
-            obj.Item1.GetVariables().ForEach(item => Variables_LB.Items.Add(item));
-            obj.Item1.GetMethods().ForEach(item => Methods_LB.Items.Add(item));
+            (element.UserObject as Class)?.Variables.ForEach(item => Variables_LB.Items.Add(item));
+            element.UserObject.Methods.ForEach(item => Methods_LB.Items.Add(item));
         }
 
         private AddParamObjectWindow ShowAddParamObjectWindow(bool withAccess = true)
@@ -165,8 +155,8 @@ namespace OOPatterns.Windows
             var item = Variables_LB.SelectedItem;
             if (item == null) return;
 
-            obj.Item1.RemoveVariable((Variable)item);
-            obj.Item2.UpdateFigure();
+            (element.UserObject as Class)?.Variables.Remove((Variable)item);
+            canvasHelper.ReDraw(element.VisualObject);
             Variables_LB.Items.Remove(item);
         }
 
@@ -175,19 +165,19 @@ namespace OOPatterns.Windows
             var item = Methods_LB.SelectedItem;
             if (item == null) return;
 
-            obj.Item1.RemoveMethod((Method)item);
-            obj.Item2.UpdateFigure();
+            element.UserObject.Methods.Remove((Method)item);
+            canvasHelper.ReDraw(element.VisualObject);
             Methods_LB.Items.Remove(item);
         }
 
         private void DeleteVariableInMethodButton_Click(object sender, RoutedEventArgs e)
         {
-            Method method = obj.Item1.GetMethod(Methods_LB.SelectedIndex) as Method;
+            var method = element.UserObject.Methods[Methods_LB.SelectedIndex] as Method;
             var item = VariablesInMethod_LB.SelectedItem;
             if (item == null) return;
 
-            method.RemoveVariable((Variable)item);
-            obj.Item2.UpdateFigure();
+            method.Parameters.Remove((Variable)item);
+            canvasHelper.ReDraw(element.VisualObject);
             VariablesInMethod_LB.Items.Remove(item);
         }
 
@@ -198,8 +188,8 @@ namespace OOPatterns.Windows
             {
                 VariablesInMethod_GB.IsEnabled = true;
 
-                Method method = obj.Item1.GetMethod(Methods_LB.SelectedIndex) as Method;
-                method.Variables.ForEach(item => VariablesInMethod_LB.Items.Add(item));
+                Method method = element.UserObject.Methods[Methods_LB.SelectedIndex] as Method;
+                method.Parameters.ForEach(item => VariablesInMethod_LB.Items.Add(item));
             }
             else
             {
@@ -235,15 +225,15 @@ namespace OOPatterns.Windows
             //class
             if (type == Core.InternalObject.Core.CLASS)
             {
-                gridView.Columns.Add(CreateColumn("AccessObject", Properties.Resources.type, 50));
-                gridView.Columns.Add(CreateColumn("TypeObject.TypeName", Properties.Resources.type, 50));
-                gridView.Columns.Add(CreateColumn("NameObject", Properties.Resources.name, 100));
+                gridView.Columns.Add(CreateColumn("Access", Properties.Resources.type, 50));
+                gridView.Columns.Add(CreateColumn("Type", Properties.Resources.type, 50));
+                gridView.Columns.Add(CreateColumn("Name", Properties.Resources.name, 100));
             }
             //interface
             else
             {
-                gridView.Columns.Add(CreateColumn("TypeObject.TypeName", Properties.Resources.type, 70));
-                gridView.Columns.Add(CreateColumn("NameObject", Properties.Resources.name, 130));
+                gridView.Columns.Add(CreateColumn("Type", Properties.Resources.type, 70));
+                gridView.Columns.Add(CreateColumn("Name", Properties.Resources.name, 130));
             }
             Methods_LB.View = gridView;
             TryToInitializeObject(type);
@@ -251,46 +241,37 @@ namespace OOPatterns.Windows
 
         private void TryToInitializeObject(string type)
         {
-            if (obj == null)
+            if (element == null)
             {
-                if (type == Core.InternalObject.Core.CLASS)
+                element = new Element();
+                if (type == Core.Core.CLASS)
                 {
-                    core.AddObject(new Class());
+                    element.VisualObject = new VisualObject(new Class(Name_TB.Text), canvasHelper.Canvas);
                 }
                 else
                 {
-                    core.AddObject(new Interface());
+                    element.VisualObject = new VisualObject(new Interface(Name_TB.Text), canvasHelper.Canvas);
                 }
-                obj = core.Last();
-                obj.Item1.SetName(Name_TB.Text);
-                canvasWorker.AddElementToCenter(obj.Item2);
-                canvasWorker.Draw();
+                core.Objects.Add(element);
+                canvasHelper.Add(element.VisualObject, true);
                 return;
             }
-            if (obj.Item1 is Class && type == Core.InternalObject.Core.INTERFACE)
+            if (element.UserObject is Class && type == Core.Core.INTERFACE)
             {
                 if (!ShowYesNoDialog("change", "to interface"))
                 {
-                    core.Remove(obj.Item1);
-                    core.AddObject(new Interface(obj.Item1));
-                    canvasWorker.RemoveElement(obj.Item2);
-
-                    obj = core.Last();
-                    canvasWorker.AddElementToCenter(obj.Item2);
+                    element.UserObject = element.UserObject.ToInterface();
+                    canvasHelper.ReDraw(element.VisualObject);
                     LoadParams();
                 }
                 else TypeObj_CB.SelectedIndex = 0;
             }
-            else if (obj.Item1 is Interface && type == Core.InternalObject.Core.CLASS)
+            else if (element.UserObject is Interface && type == Core.Core.CLASS)
             {
                 if (!ShowYesNoDialog("change", "to class"))
                 {
-                    core.Remove(obj.Item1);
-                    core.AddObject(new Class(obj.Item1));
-                    canvasWorker.RemoveElement(obj.Item2);
-
-                    obj = core.Last();
-                    canvasWorker.AddElementToCenter(obj.Item2);
+                    element.UserObject = element.UserObject.ToClass();
+                    canvasHelper.ReDraw(element.VisualObject);
                     LoadParams();
                 }
                 else TypeObj_CB.SelectedIndex = 1;
@@ -324,9 +305,9 @@ namespace OOPatterns.Windows
         /// <returns></returns>
         private bool ObjectValidate()
         {
-            if (obj == null) return false;
-            obj.Item1.SetName(Name_TB.Text);
-            return !obj.Item1.GetName().Equals("");
+            if (element == null) return false;
+            element.UserObject.Name = Name_TB.Text;
+            return !element.UserObject.Name.Equals("");
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

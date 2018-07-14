@@ -9,14 +9,18 @@ namespace OOPatterns.Core.Utils.Log
 {
     class Logger : ILoggable
     {
-        string PathToFile = "";
+        public string PathToFile { get; set; } = "";
 
         public void Log(string Message)
         {
-            using(StreamWriter sw = new StreamWriter(new FileStream(PathToFile, FileMode.Append)))
+            if (PathToFile != "")
             {
-                sw.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}\t{Message}");
+                using (StreamWriter sw = new StreamWriter(new FileStream(PathToFile, FileMode.Append)))
+                {
+                    sw.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}\t{Message}");
+                }
             }
+            System.Diagnostics.Debug.WriteLine(Message);
         }
 
         public void SetPathToFile(string Path)

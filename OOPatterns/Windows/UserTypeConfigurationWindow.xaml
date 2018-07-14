@@ -16,9 +16,9 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Header="{x:Static p:Resources.access}" DisplayMemberBinding="{Binding Path=AccessObject}" Width="50"></GridViewColumn>
-                                <GridViewColumn Header="{x:Static p:Resources.type}" DisplayMemberBinding="{Binding Path=TypeObject.TypeName}" Width="50"></GridViewColumn>
-                                <GridViewColumn Header="{x:Static p:Resources.name}" DisplayMemberBinding="{Binding Path=NameObject}" Width="100"></GridViewColumn>
+                                <GridViewColumn Header="{x:Static p:Resources.access}" DisplayMemberBinding="{Binding Path=Access}" Width="50"></GridViewColumn>
+                                <GridViewColumn Header="{x:Static p:Resources.type}" DisplayMemberBinding="{Binding Path=Type}" Width="50"></GridViewColumn>
+                                <GridViewColumn Header="{x:Static p:Resources.name}" DisplayMemberBinding="{Binding Path=Name}" Width="100"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -34,8 +34,8 @@
                         <ListView HorizontalAlignment="Left" Height="135" Margin="10,41,0,0" VerticalAlignment="Top" Width="233" Name="VariablesInMethod_LB">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="{x:Static p:Resources.type}" DisplayMemberBinding="{Binding Path=TypeObject.TypeName}" Width="70"></GridViewColumn>
-                                    <GridViewColumn Header="{x:Static p:Resources.name}" DisplayMemberBinding="{Binding Path=NameObject}" Width="130"></GridViewColumn>
+                                    <GridViewColumn Header="{x:Static p:Resources.type}" DisplayMemberBinding="{Binding Path=Type}" Width="70"></GridViewColumn>
+                                    <GridViewColumn Header="{x:Static p:Resources.name}" DisplayMemberBinding="{Binding Path=Name}" Width="130"></GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -46,9 +46,9 @@
                 <ListView HorizontalAlignment="Left" Height="158" Margin="10,48,0,0" VerticalAlignment="Top" Width="233" Name="Methods_LB" SelectionChanged="Methods_LB_SelectionChanged">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="{x:Static p:Resources.access}" DisplayMemberBinding="{Binding Path=AccessObject}" Width="50"></GridViewColumn>
-                            <GridViewColumn Header="{x:Static p:Resources.type}" DisplayMemberBinding="{Binding Path=TypeObject.TypeName}" Width="50"></GridViewColumn>
-                            <GridViewColumn Header="{x:Static p:Resources.name}" DisplayMemberBinding="{Binding Path=NameObject}" Width="100"></GridViewColumn>
+                            <GridViewColumn Header="{x:Static p:Resources.access}" DisplayMemberBinding="{Binding Path=Access}" Width="50"></GridViewColumn>
+                            <GridViewColumn Header="{x:Static p:Resources.type}" DisplayMemberBinding="{Binding Path=Type}" Width="50"></GridViewColumn>
+                            <GridViewColumn Header="{x:Static p:Resources.name}" DisplayMemberBinding="{Binding Path=Name}" Width="100"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

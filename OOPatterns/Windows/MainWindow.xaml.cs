@@ -1,20 +1,8 @@
-﻿using OOPatterns.Core.InternalObject.UserType;
-using OOPatterns.Core.VisualObjects;
+﻿using OOPatterns.Core.Helpers;
 using OOPatterns.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OOPatterns
 {
@@ -23,41 +11,37 @@ namespace OOPatterns
     /// </summary>
     public partial class MainWindow : Window
     {
-        Core.InternalObject.Core core;
-        CanvasWorker canvasWorker;
+        Core.Core core;
+        CanvasHelper canvasHelper;
+        Point startPosition;
 
         private bool isDown = false;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            core = Core.InternalObject.Core.GetInstance();
+            core = Core.Core.GetInstance();
             InitCanvas();
         }
 
         private void InitCanvas()
         {
-            canvasWorker = new CanvasWorker(ElementsView);
-            UpdateElements();
+            canvasHelper = new CanvasHelper(ElementsView);
+            Load();
         }
 
-        private void UpdateElements()
+        private void Load()
         {
-            canvasWorker.Clear();
-            core.GetVisualObjects().ForEach(obj => canvasWorker.AddElement(obj.CenteredObject(false)));
+            core.Objects.ForEach(obj => canvasHelper.Add(obj.VisualObject));
         }
 
         private void configurationButton_Click(object sender, RoutedEventArgs e)
         {
             UserTypeConfigurationWindow w = new UserTypeConfigurationWindow();
             w.ShowDialog();
-            UpdateElements();
+            //UpdateElements
         }
-
-        /*
-         * TODO: Заменить
-         */
+        
         private void ElementsView_MouseUp(object sender, MouseButtonEventArgs e)
         {
             isDown = false;
@@ -68,7 +52,6 @@ namespace OOPatterns
 
         }
         
-        Point startPosition;
         private void ElementsView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!(e.OriginalSource is Canvas))
@@ -77,7 +60,20 @@ namespace OOPatterns
                 startPosition = e.GetPosition(ElementsView);
                 var elem = e.OriginalSource as FrameworkElement;
                 elem.CaptureMouse();
-                canvasWorker.SelectElement(elem.Name);
+                canvasHelper.Select(elem.Name);
+                if (e.ClickCount == 2)
+                {
+                    UserTypeConfigurationWindow w = new UserTypeConfigurationWindow(core.Objects.Find(obj => obj.VisualObject.Name == canvasHelper.SelectedItem.Name));
+                    w.ShowDialog();
+
+                    isDown = false;
+                    elem.ReleaseMouseCapture();
+                    //UpdateElements
+                }
+            }
+            else
+            {
+                canvasHelper.Deselect();
             }
         }
 
@@ -89,7 +85,7 @@ namespace OOPatterns
             {
                 if (isDown)
                 {
-                    canvasWorker.MoveElement(startPosition, endPosition);
+                    canvasHelper.SelectedItem.Move(startPosition, endPosition);
                     startPosition = endPosition;
                 }
             }

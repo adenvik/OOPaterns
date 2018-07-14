@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPatterns.Core.Utils.Modificators
+namespace OOPatterns.Core.Helpers
 {
-    public class Access
+    public static class Access
     {
         public static string PUBLIC = "public";
         public static string PROTECTED = "protected";
         public static string PRIVATE = "private";
 
-        public List<string> GetAccess()
+        public static string[] GetAccess()
         {
-            return new List<string>() {PUBLIC, PROTECTED, PRIVATE};
+            return new[] {PUBLIC, PROTECTED, PRIVATE};
         }
     }
 }

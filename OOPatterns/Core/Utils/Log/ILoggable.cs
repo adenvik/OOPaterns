@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core.Utils.Log
 {
-    interface ILoggable
+    public interface ILoggable
     {
-        void SetPathToFile(string Path);
+        string PathToFile { get; set; }
         void Log(string Message);
     }
 }

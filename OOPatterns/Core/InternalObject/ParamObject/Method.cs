@@ -1,69 +1,24 @@
-﻿using OOPatterns.Core.Utils.Type;
-using System;
+﻿using OOPatterns.Core.Helpers;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOPatterns.Core.InternalObject.ParamObject
 {
     public class Method : IParamObject
     {
-        public List<Variable> Variables { get; }
-        public string Body { get; set; }
-
-        Method()
-        {
-            Variables = new List<Variable>();
-        }
-
-        public Method(TypeObject Type, string Name) : this()
-        {
-            TypeObject = Type;
-            NameObject = Name;
-        }
-
-        public Method(string Access, TypeObject Type, string Name) : this(Type, Name)
-        {
-            AccessObject = Access;
-        }
-
-        public void AddVariable(Variable variable)
-        {
-            Variables.Add(variable);
-        }
-
-        public void RemoveVariable(Variable variable)
-        {
-            Variables.Remove(variable);
-        }
-
-        public void RemoveVariableAt(int index)
-        {
-            if (index < Variables.Count)
-            {
-                Variables.RemoveAt(index);
-            }
-        }
+        public string Access { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public List<IParamObject> Parameters { get; set; } = new List<IParamObject>();
+        public string Content { get; set; }
 
         public override string ToString()
         {
-            var result = base.ToString() + $"(";
-            Variables.ForEach(v => result += $"{v.TypeObject.TypeInLanguage} {v.NameObject},");
-            if (result.EndsWith(",")) result = result.Substring(0, result.Length - 1);
-            return $"{result})";
-        }
+            string result =  $"{Type} {Name}(";
 
-        public override bool Equals(object obj)
-        {
-            if (obj is Method m)
-            {
-                if (NameObject == m.NameObject && Variables.Count == m.Variables.Count)
-                {
-                    return true;
-                }
-            }
-            return false;
+            Parameters.ForEach(p => result += $"{p.Type} {p.Name}, ");
+            if (result.EndsWith(",")) result = result.Substring(0, result.Length - 1);
+
+            return $"{result})";
         }
     }
 }
