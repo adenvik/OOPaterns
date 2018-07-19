@@ -63,7 +63,6 @@
     <Compile Include="Core\Helpers\SystemName.cs" />
     <Compile Include="Core\Helpers\Type.cs" />
     <Compile Include="Core\Helpers\VisualProperties.cs" />
-    <Compile Include="Core\InternalObject\Core.cs" />
     <Compile Include="Core\InternalObject\UserType\UserType.cs" />
     <Compile Include="Core\Helpers\IUnique.cs" />
     <Compile Include="Core\Helpers\Unique.cs" />

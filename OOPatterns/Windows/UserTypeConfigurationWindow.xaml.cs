@@ -15,6 +15,8 @@ namespace OOPatterns.Windows
     /// </summary>
     public partial class UserTypeConfigurationWindow : Window
     {
+        public bool IsAdded { get; protected set; } = true;
+
         Core.Core core;
         CanvasHelper canvasHelper;
         Element element;
@@ -120,8 +122,9 @@ namespace OOPatterns.Windows
                 return;
             }
 
+            element.VisualObject = new VisualObject(element.UserObject, ElementView);
             canvasHelper.Add(element.VisualObject, true);
-            ParentObj_CB.Items.RemoveAt(objects.FindIndex(o => o.Equals(element.UserObject)));
+            //ParentObj_CB.Items.RemoveAt(objects.FindIndex(o => o.Equals(element.UserObject)));
             LoadParams();
         }
 
@@ -201,15 +204,15 @@ namespace OOPatterns.Windows
         {
             switch (TypeObj_CB.SelectedItem)
             {
-                case Core.InternalObject.Core.CLASS:
+                case Core.Core.CLASS:
                     Variables_GB.IsEnabled = true;
                     Methods_GB.IsEnabled = true;
                     ChangeType();
                     break;
-                case Core.InternalObject.Core.INTERFACE:
+                case Core.Core.INTERFACE:
                     Variables_GB.IsEnabled = false;
                     Methods_GB.IsEnabled = true;
-                    ChangeType(Core.InternalObject.Core.INTERFACE);
+                    ChangeType(Core.Core.INTERFACE);
                     break;
                 default:
                     break;
@@ -219,11 +222,11 @@ namespace OOPatterns.Windows
         /// <summary>
         /// 
         /// </summary>
-        private void ChangeType(string type = Core.InternalObject.Core.CLASS)
+        private void ChangeType(string type = Core.Core.CLASS)
         {
             GridView gridView = new GridView();
             //class
-            if (type == Core.InternalObject.Core.CLASS)
+            if (type == Core.Core.CLASS)
             {
                 gridView.Columns.Add(CreateColumn("Access", Properties.Resources.type, 50));
                 gridView.Columns.Add(CreateColumn("Type", Properties.Resources.type, 50));
@@ -243,6 +246,11 @@ namespace OOPatterns.Windows
         {
             if (element == null)
             {
+                if(Name_TB.Text == "")
+                {
+                    MessageBox.Show("Input object name!");
+                    return;
+                }
                 element = new Element();
                 if (type == Core.Core.CLASS)
                 {
@@ -258,7 +266,7 @@ namespace OOPatterns.Windows
             }
             if (element.UserObject is Class && type == Core.Core.INTERFACE)
             {
-                if (!ShowYesNoDialog("change", "to interface"))
+                if (ShowYesNoDialog("change", "to interface"))
                 {
                     element.UserObject = element.UserObject.ToInterface();
                     canvasHelper.ReDraw(element.VisualObject);
@@ -268,7 +276,7 @@ namespace OOPatterns.Windows
             }
             else if (element.UserObject is Interface && type == Core.Core.CLASS)
             {
-                if (!ShowYesNoDialog("change", "to class"))
+                if (ShowYesNoDialog("change", "to class"))
                 {
                     element.UserObject = element.UserObject.ToClass();
                     canvasHelper.ReDraw(element.VisualObject);
@@ -293,10 +301,10 @@ namespace OOPatterns.Windows
         /// </summary>
         /// <param name="title">Title of dialog</param>
         /// <param name="message">Message of dialog</param>
-        /// <returns>User press No</returns>
+        /// <returns>User press Yes</returns>
         private bool ShowYesNoDialog(string title, string message)
         {
-            return MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No;
+            return MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
         }
 
         /// <summary>
@@ -316,15 +324,18 @@ namespace OOPatterns.Windows
             {
                 string title = Properties.Resources.save_object_question;
                 string message = Properties.Resources.save_object_message;
-                e.Cancel = ShowYesNoDialog(title, message);
+                e.Cancel = !ShowYesNoDialog(title, message);
                 if (!e.Cancel)
                 {
-                    //core.Remove(obj.Item1);
-                    ElementView.Children.Clear();
+                    core.Objects.RemoveAt(core.Objects.Count - 1);
+                    IsAdded = false;
+                }
+                else
+                {
+                    element.VisualObject.DestroyOnCanvas();
                 }
                 return;
             }
-            ElementView.Children.Clear();
         }
     }
 }

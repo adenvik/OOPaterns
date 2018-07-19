@@ -39,7 +39,13 @@ namespace OOPatterns
         {
             UserTypeConfigurationWindow w = new UserTypeConfigurationWindow();
             w.ShowDialog();
-            //UpdateElements
+            //Load last elements
+            if (w.IsAdded)
+            {
+                var obj = core.Objects[core.Objects.Count - 1];
+                obj.VisualObject = new Core.VisualObjects.VisualObject(obj.UserObject, ElementsView);
+                canvasHelper.Add(obj.VisualObject);
+            }
         }
         
         private void ElementsView_MouseUp(object sender, MouseButtonEventArgs e)
@@ -63,12 +69,24 @@ namespace OOPatterns
                 canvasHelper.Select(elem.Name);
                 if (e.ClickCount == 2)
                 {
-                    UserTypeConfigurationWindow w = new UserTypeConfigurationWindow(core.Objects.Find(obj => obj.VisualObject.Name == canvasHelper.SelectedItem.Name));
+                    canvasHelper.SelectedItem.DestroyOnCanvas();
+                    ElementsView.Children.Clear();
+                    var selectedObj = core.Objects.Find(obj => obj.VisualObject.Name == canvasHelper.SelectedItem.Name);
+                    canvasHelper.Remove(selectedObj.VisualObject);
+
+                    UserTypeConfigurationWindow w = new UserTypeConfigurationWindow(selectedObj);
                     w.ShowDialog();
 
                     isDown = false;
                     elem.ReleaseMouseCapture();
                     //UpdateElements
+                    if (w.IsAdded)
+                    {
+                        selectedObj.VisualObject = new Core.VisualObjects.VisualObject(selectedObj.UserObject, ElementsView);
+                        canvasHelper.Add(selectedObj.VisualObject);
+                        selectedObj.VisualObject.Select();
+                        selectedObj.VisualObject.MoveTo(startPosition.X, startPosition.Y);
+                    }
                 }
             }
             else

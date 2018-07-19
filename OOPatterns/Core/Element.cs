@@ -18,14 +18,9 @@ namespace OOPatterns.Core
             }
             set
             {
-                VisualObject = new VisualObject(UserObject, VisualObject.Canvas);
+                VisualObject = new VisualObject(value, VisualObject);
             }
         }
         public VisualObject VisualObject { get; set; }
-
-        public Element()
-        {
-
-        }
     }
 }

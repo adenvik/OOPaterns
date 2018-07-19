@@ -21,11 +21,12 @@ namespace OOPatterns.Core.Helpers
             Objects = new List<VisualObject>();
         }
 
-        public void Add(VisualObject obj, bool centered = false)
+        public void Add(VisualObject obj, bool isCentered = false)
         {
             Objects.Add(obj);
             obj.Z = Objects.Count * 2;
-            obj.Draw(centered);
+            obj.IsCentered = isCentered;
+            obj.Draw();
         }
 
         public void ReDraw(VisualObject obj)
