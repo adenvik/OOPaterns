@@ -5,11 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OOPatterns"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="530.333">
+        BorderBrush="Black"
+        BorderThickness="1"
+        Title="MainWindow" Height="538" Width="850.333" MinWidth="500" MinHeight="300" ResizeMode="NoResize" WindowStyle="None">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="432,10,0,0" VerticalAlignment="Top" Width="75" Name="configurationButton" Click="configurationButton_Click"/>
-        <Canvas HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="417" Background="Silver" Name="ElementsView" MouseUp="ElementsView_MouseUp" MouseDown="ElementsView_MouseDown" MouseMove="ElementsView_MouseMove"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="432,44,0,0" VerticalAlignment="Top" Width="75" Name="State"/>
-
+        <Grid Width="250" HorizontalAlignment="Left" Background="Black" Name="LeftToolbar">
+            <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Top" Margin="0,25,0,0" Name="Diagram" MouseEnter="Nav_MouseEnter" MouseLeave="Nav_MouseLeave">
+                <Image Width="50" Height="50"/>
+                <Label Height="50" Content="Диаграмма" Foreground="White" FontSize="20" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Top" Margin="0,75,0,0" Name="Edit" MouseEnter="Nav_MouseEnter" MouseLeave="Nav_MouseLeave">
+                <Image Width="50" Height="50"/>
+                <Label Height="50" Content="Редактирование" Foreground="White" FontSize="20" VerticalContentAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <Grid Height="25" VerticalAlignment="Top" Background="Black" Name="TopToolbar" MouseLeftButtonDown="TopToolbar_MouseLeftButtonDown">
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0" Content="OOPatterns" Foreground="White" FontSize="12" FontFamily="Copperplate Gothic Bold" Name="Name" MouseLeftButtonDown="Name_MouseLeftButtonDown">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="New"/>
+                        <MenuItem Header="Open"/>
+                        <MenuItem Header="Save"/>
+                        <Separator />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <Button Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,50,0" Background="Transparent" BorderBrush="Transparent" Content="_" FontSize="12" Foreground="White" Name="Hide" Click="Hide_Click"/>
+            <Button Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,25,0" Background="Transparent" BorderBrush="Transparent" Content="□" FontSize="12" Foreground="White" Name="Maximize" Click="Maximize_Click"/>
+            <Button Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent" Content="x" FontSize="12" Foreground="White" Name="Close" Click="Close_Click"/>
+        </Grid>
+        <Grid Height="25" VerticalAlignment="Bottom" Background="Black" Name="BottomToolbar">
+            <Label HorizontalAlignment="Left" Margin="250,0,0,0" Name="State" Foreground="White" FontSize="11"/>
+        </Grid>
+        <Button Content="Button" HorizontalAlignment="Right" Margin="0,150,10,0" VerticalAlignment="Top" Width="75" Name="configurationButton" Click="configurationButton_Click"/>
+        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="250,25,100,25" Background="Silver" Name="ElementsView" MouseUp="ElementsView_MouseUp" MouseDown="ElementsView_MouseDown" MouseMove="ElementsView_MouseMove"/>
+        <!--<Label Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,100,10,0" Name="State"/>-->
     </Grid>
 </Window>

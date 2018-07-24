@@ -3,6 +3,7 @@ using OOPatterns.Windows;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace OOPatterns
 {
@@ -14,6 +15,7 @@ namespace OOPatterns
         Core.Core core;
         CanvasHelper canvasHelper;
         Point startPosition;
+        bool IsMaximized = false;
 
         private bool isDown = false;
 
@@ -98,7 +100,7 @@ namespace OOPatterns
         private void ElementsView_MouseMove(object sender, MouseEventArgs e)
         {
             Point endPosition = e.GetPosition(ElementsView);
-            State.Content = $"{endPosition.X} {endPosition.Y}";
+            State.Content = $"x:{endPosition.X} y:{endPosition.Y}";
             if (!(e.OriginalSource is Canvas))
             {
                 if (isDown)
@@ -107,6 +109,46 @@ namespace OOPatterns
                     startPosition = endPosition;
                 }
             }
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void TopToolbar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Hide_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = IsMaximized ? WindowState.Normal : WindowState.Maximized;
+            IsMaximized = !IsMaximized;
+        }
+
+        private void Nav_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var panel = sender as StackPanel;
+            panel.Background = Brushes.AliceBlue;
+            (panel.Children[1] as Label).Foreground = Brushes.Black;
+        }
+
+        private void Nav_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var panel = sender as StackPanel;
+            panel.Background = Brushes.Transparent;
+            (panel.Children[1] as Label).Foreground = Brushes.White;
+        }
+
+        private void Name_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            (sender as Label).ContextMenu.IsOpen = true;
         }
     }
 }

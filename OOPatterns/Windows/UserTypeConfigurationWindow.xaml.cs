@@ -327,12 +327,15 @@ namespace OOPatterns.Windows
                 e.Cancel = !ShowYesNoDialog(title, message);
                 if (!e.Cancel)
                 {
-                    core.Objects.RemoveAt(core.Objects.Count - 1);
+                    if (element != null)
+                    {
+                        core.Objects.RemoveAt(core.Objects.Count - 1);
+                    }
                     IsAdded = false;
                 }
                 else
                 {
-                    element.VisualObject.DestroyOnCanvas();
+                    element?.VisualObject.DestroyOnCanvas();
                 }
                 return;
             }
