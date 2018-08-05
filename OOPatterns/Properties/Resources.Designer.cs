@@ -70,6 +70,15 @@ namespace OOPatterns.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Add.
+        /// </summary>
+        public static string add {
+            get {
+                return ResourceManager.GetString("add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Add method.
         /// </summary>
         public static string add_method {
@@ -88,11 +97,38 @@ namespace OOPatterns.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Close without saving?.
+        /// </summary>
+        public static string closeWithoutSaving {
+            get {
+                return ResourceManager.GetString("closeWithoutSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Delete.
         /// </summary>
         public static string delete {
             get {
                 return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Diagram.
+        /// </summary>
+        public static string diagram {
+            get {
+                return ResourceManager.GetString("diagram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Editing.
+        /// </summary>
+        public static string editing {
+            get {
+                return ResourceManager.GetString("editing", resourceCulture);
             }
         }
         
@@ -124,6 +160,15 @@ namespace OOPatterns.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Name is empty!.
+        /// </summary>
+        public static string nameIsEmpty {
+            get {
+                return ResourceManager.GetString("nameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Object information.
         /// </summary>
         public static string object_info {
@@ -142,11 +187,11 @@ namespace OOPatterns.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Parent object.
+        ///   Ищет локализованную строку, похожую на Parents.
         /// </summary>
-        public static string parent_obj {
+        public static string parents {
             get {
-                return ResourceManager.GetString("parent_obj", resourceCulture);
+                return ResourceManager.GetString("parents", resourceCulture);
             }
         }
         
@@ -166,6 +211,15 @@ namespace OOPatterns.Properties {
         public static string save_object_question {
             get {
                 return ResourceManager.GetString("save_object_question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на System name!.
+        /// </summary>
+        public static string systemNameAlert {
+            get {
+                return ResourceManager.GetString("systemNameAlert", resourceCulture);
             }
         }
         

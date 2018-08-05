@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="Primary" Color="#2d2d2d"/>
+    <SolidColorBrush x:Key="PrimaryDark" Color="#1b1b1c"/>
+    <SolidColorBrush x:Key="PrimaryLight" Color="#3e3e40"/>
+    <SolidColorBrush x:Key="PrimaryForeground" Color="White"/>
+
+    <SolidColorBrush x:Key="ControlBorder" Color="#545454"/>
+    <SolidColorBrush x:Key="DisabledForeground" Color="#888888" />
+
+    <SolidColorBrush x:Key="PrimaryButton" Color="#686868" />
+    <SolidColorBrush x:Key="OverButton" Color="#959595" />
+    <SolidColorBrush x:Key="SystemButton" Color="Transparent" />
+    <SolidColorBrush x:Key="OverSystemButton" Color="#dd3E3E3E" />
+    <SolidColorBrush x:Key="OverSystemButtonForeground" Color="White" />
+    <SolidColorBrush x:Key="OverCloseButton" Color="#FF3939" />
+</ResourceDictionary>

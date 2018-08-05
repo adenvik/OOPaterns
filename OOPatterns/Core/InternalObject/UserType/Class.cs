@@ -13,7 +13,7 @@ namespace OOPatterns.Core.InternalObject.UserType
         {
         }
 
-        public Class(string name) : base(name)
+        public Class(string name = Core.CLASS) : base(name)
         {
 
         }

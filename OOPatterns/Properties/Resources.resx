@@ -144,8 +144,8 @@
   <data name="object_type" xml:space="preserve">
     <value>Object type</value>
   </data>
-  <data name="parent_obj" xml:space="preserve">
-    <value>Parent object</value>
+  <data name="parents" xml:space="preserve">
+    <value>Parents</value>
   </data>
   <data name="save_object_question" xml:space="preserve">
     <value>Save object?</value>
@@ -162,5 +162,23 @@
   <data name="save_object_message" xml:space="preserve">
     <value>Object will be deleted.
 Do you want to get out?</value>
+  </data>
+  <data name="diagram" xml:space="preserve">
+    <value>Diagram</value>
+  </data>
+  <data name="editing" xml:space="preserve">
+    <value>Editing</value>
+  </data>
+  <data name="add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="nameIsEmpty" xml:space="preserve">
+    <value>Name is empty!</value>
+  </data>
+  <data name="systemNameAlert" xml:space="preserve">
+    <value>System name!</value>
+  </data>
+  <data name="closeWithoutSaving" xml:space="preserve">
+    <value>Close without saving?</value>
   </data>
 </root>

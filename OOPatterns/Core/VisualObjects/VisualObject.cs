@@ -16,8 +16,26 @@ namespace OOPatterns.Core.VisualObjects
 {
     public class VisualObject
     {
-        public double X { get; set; } = 0;
-        public double Y { get; set; } = 0;
+        private double x = 0;
+        public double X
+        {
+            get => x;
+            set
+            {
+                x = value;
+                MoveTo(X, Y);
+            }
+        }
+        private double y = 0;
+        public double Y
+        {
+            get => y;
+            set
+            {
+                y = value;
+                MoveTo(X, Y);
+            }
+        }
         public double Width { get; set; } = 0;
         public double Height { get; set; } = 0;
         public bool IsCentered { get; set; } = false;
@@ -39,7 +57,7 @@ namespace OOPatterns.Core.VisualObjects
 
         private Path Path;
         private Image Image;
-        private List<TextBlock> TextBlocks = new List<TextBlock>();
+        private List<Text> TextBlocks = new List<Text>();
 
         public VisualObject(UserType obj, Canvas canvas)
         {
@@ -95,24 +113,23 @@ namespace OOPatterns.Core.VisualObjects
             {
                 deltaY = 0;
             }
-            MoveTo(deltaX, deltaY);
+            X = deltaX;
+            Y = deltaY;
         }
 
         public void MoveTo(double x, double y)
         {
-            Canvas.SetLeft(Path, Canvas.GetLeft(Path) + x);
-            Canvas.SetTop(Path, Canvas.GetTop(Path) + y);
+            Canvas.SetLeft(Path, x);
+            Canvas.SetTop(Path, y);
 
-            Canvas.SetLeft(Image, Canvas.GetLeft(Image) + x);
-            Canvas.SetTop(Image, Canvas.GetTop(Image) + y);
+            Canvas.SetLeft(Image, x + Width - VisualProperties.ImageSize - VisualProperties.Delta);
+            Canvas.SetTop(Image, y + VisualProperties.Delta);
 
             TextBlocks.ForEach(tb =>
             {
-                Canvas.SetLeft(tb, Canvas.GetLeft(tb) + x);
-                Canvas.SetTop(tb, Canvas.GetTop(tb) + y);
+                Canvas.SetLeft(tb, tb.X + x);
+                Canvas.SetTop(tb, tb.Y + y);
             });
-            X = x;
-            Y = y;
         }
 
         private void UpdateZ()
@@ -197,9 +214,10 @@ namespace OOPatterns.Core.VisualObjects
         {
             if (IsCentered)
             {
-                double newX = Canvas.Width / 2 - Width / 2;
-                double newY = Canvas.Height / 2 - Height / 2;
-                MoveTo(newX, newY);
+                double newX = Canvas.ActualWidth / 2 - Width / 2;
+                double newY = Canvas.ActualHeight / 2 - Height / 2;
+                X = newX;
+                Y = newY;
             }
             Canvas.Children.Add(Path);
             Canvas.Children.Add(Image);
@@ -236,7 +254,7 @@ namespace OOPatterns.Core.VisualObjects
 
         private void DrawText(double x, double y, string text, double fontSize, AlignmentX alignment = AlignmentX.Left)
         {
-            var textBlock = new TextBlock();
+            var textBlock = new Text();
             textBlock.Name = Name;
             textBlock.Text = text;
             textBlock.FontSize = fontSize;
@@ -245,12 +263,15 @@ namespace OOPatterns.Core.VisualObjects
             {
                 case AlignmentX.Left:
                     Canvas.SetLeft(textBlock, x + VisualProperties.Delta);
+                    textBlock.X = x + VisualProperties.Delta;
                     break;
                 case AlignmentX.Right:
                     var textWidht = VisualProperties.GetTextSize(text, fontSize).Width;
                     Canvas.SetLeft(textBlock, Width - textWidht - VisualProperties.Delta);
+                    textBlock.X = Width - textWidht - VisualProperties.Delta;
                     break;
             }
+            textBlock.Y = y + VisualProperties.Delta;
             Canvas.SetTop(textBlock, y + VisualProperties.Delta);
             Canvas.SetZIndex(textBlock, Z + 1);
             TextBlocks.Add(textBlock);
@@ -262,11 +283,11 @@ namespace OOPatterns.Core.VisualObjects
             var METHODS_TEXT_WIDTH = VisualProperties.GetTextSize(VisualProperties.METHODS, VisualProperties.PROPERTIES_TEXT_SIZE).Width + VisualProperties.Delta * 2;
             var OBJECT_NAME_WIDTH = VisualProperties.GetTextSize(Object.Name, VisualProperties.FontSize).Width + VisualProperties.ImageSize + VisualProperties.Delta * 2;
 
-            double maxWidth = VARIABLES_TEXT_WIDTH > METHODS_TEXT_WIDTH && METHODS_TEXT_WIDTH > OBJECT_NAME_WIDTH ?
+            double maxWidth = VARIABLES_TEXT_WIDTH > METHODS_TEXT_WIDTH && VARIABLES_TEXT_WIDTH > OBJECT_NAME_WIDTH ?
                        VARIABLES_TEXT_WIDTH :
-                       METHODS_TEXT_WIDTH > VARIABLES_TEXT_WIDTH && VARIABLES_TEXT_WIDTH > OBJECT_NAME_WIDTH ?
+                       METHODS_TEXT_WIDTH > VARIABLES_TEXT_WIDTH && METHODS_TEXT_WIDTH > OBJECT_NAME_WIDTH ?
                        METHODS_TEXT_WIDTH : OBJECT_NAME_WIDTH;
-
+            
             double textCount = 1;
             double textHeight = VisualProperties.GetTextSize(VisualProperties.VARIABLES, VisualProperties.FontSize).Height;
             //Variables
@@ -307,6 +328,12 @@ namespace OOPatterns.Core.VisualObjects
         {
             if (value) Path.Stroke = VisualProperties.Selected;
             else Path.Stroke = VisualProperties.Normal;
+        }
+
+        class Text : TextBlock
+        {
+            public double X { get; set; }
+            public double Y { get; set; }
         }
     }
 }

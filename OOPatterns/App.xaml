@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:OOPatterns"
              StartupUri="Windows/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Windows/Themes/ComboBox.xaml" />
+                <ResourceDictionary Source="/Windows/Themes/TextBox.xaml" />
+                <ResourceDictionary Source="/Windows/Themes/ContextMenu.xaml" />
+                <ResourceDictionary Source="/Windows/Themes/Brushes.xaml" />
+                <ResourceDictionary Source="/Windows/Themes/TextStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

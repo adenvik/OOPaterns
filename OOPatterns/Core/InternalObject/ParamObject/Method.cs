@@ -16,7 +16,7 @@ namespace OOPatterns.Core.InternalObject.ParamObject
             string result =  $"{Type} {Name}(";
 
             Parameters.ForEach(p => result += $"{p.Type} {p.Name}, ");
-            if (result.EndsWith(",")) result = result.Substring(0, result.Length - 1);
+            if (result.EndsWith(", ")) result = result.Substring(0, result.Length - 2);
 
             return $"{result})";
         }

@@ -14,7 +14,7 @@ namespace OOPatterns.Core.Helpers
 
         public static string[] GetAccess()
         {
-            return new[] {PUBLIC, PROTECTED, PRIVATE};
+            return new[] { PRIVATE, PROTECTED, PUBLIC };
         }
     }
 }

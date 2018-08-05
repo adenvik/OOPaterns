@@ -2,6 +2,7 @@
 using OOPatterns.Core.InternalObject.ParamObject;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace OOPatterns.Core.InternalObject.UserType
 {
@@ -18,6 +19,10 @@ namespace OOPatterns.Core.InternalObject.UserType
         {
             Name = name;
             GenerateId();
+            if(name == Core.CLASS || name == Core.INTERFACE)
+            {
+                Name = $"{name}{Id}";
+            }
         }
 
         public UserType(UserType userType)

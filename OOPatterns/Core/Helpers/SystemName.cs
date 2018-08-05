@@ -10,7 +10,7 @@ namespace OOPatterns.Core.Helpers
     {
         public static bool Check(string name)
         {
-            return true;
+            return false;
         }
     }
 }

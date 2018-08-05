@@ -1,0 +1,32 @@
+﻿<Window x:Class="OOPatterns.Windows.ParamObjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:p="clr-namespace:OOPatterns.Properties"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrl="clr-namespace:OOPatterns.Windows.Controls"
+        xmlns:local="clr-namespace:OOPatterns.Windows"
+        mc:Ignorable="d"
+        Title="ParamObjectWindow"
+        Width="350" Height="65" WindowStyle="None" ResizeMode="NoResize" Background="{DynamicResource PrimaryDark}" 
+        PreviewKeyDown="Window_PreviewKeyDown"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing" AllowsTransparency="True">
+    <Grid>
+        <Label Height="25" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Добавление переменной" Foreground="{DynamicResource PrimaryForeground}" FontFamily="{DynamicResource PrimaryFontFamily}" Name="Title"/>
+        <StackPanel Height="25" VerticalAlignment="Top" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Background="Transparent">
+            <ctrl:ButtonControl Height="25" Width="25" HorizontalAlignment="Right" Text="x" VerticalAlignment="Top" 
+                  Background="{DynamicResource SystemButton}" NormalBackground="{DynamicResource SystemButton}" MouseOverBackground="{DynamicResource OverCloseButton}" 
+                  BorderThickness="0" Click="Close_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Margin="10,30,10,10" MinWidth="340" Height="25">
+                <ComboBox Style="{DynamicResource ComboBoxStyle}" MinWidth="70" ToolTip="Access" Name="AccessCB"/>
+                <ComboBox Style="{DynamicResource ComboBoxStyle}" MinWidth="100" Margin="10,0" ToolTip="Type" Name="TypeCB"/>
+                <TextBox Style="{DynamicResource TextBoxStyle}" MinWidth="140" Margin="0,0,10,0" ToolTip="Name" Name="NameTB"/>
+                <TextBox Style="{DynamicResource TextBoxStyle}" Width="0" MaxWidth="140" ToolTip="Variables" Name="VariablesTB" IsReadOnly="True" Foreground="{DynamicResource DisabledForeground}" MouseDoubleClick="Variables_MouseDoubleClick" Visibility="Collapsed"/>
+                <ctrl:ButtonControl Text="{x:Static p:Resources.add_variable}" Width="140" Height="25" x:Name="AddVariable" Click="AddVariable_Click" Visibility="Collapsed"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

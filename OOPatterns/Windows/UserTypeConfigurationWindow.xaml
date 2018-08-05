@@ -70,7 +70,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="{x:Static p:Resources.parent_obj}" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static p:Resources.parents}" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top"/>
                 <ComboBox HorizontalAlignment="Left" Margin="112,73,0,0" VerticalAlignment="Top" Width="93" Name="ParentObj_CB" Height="26">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>

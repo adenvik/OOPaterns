@@ -144,8 +144,8 @@
   <data name="object_type" xml:space="preserve">
     <value>Тип объекта</value>
   </data>
-  <data name="parent_obj" xml:space="preserve">
-    <value>Род. объект</value>
+  <data name="parents" xml:space="preserve">
+    <value>Род. объекты</value>
   </data>
   <data name="save_object_question" xml:space="preserve">
     <value>Сохранить объект?</value>
@@ -162,5 +162,23 @@
   <data name="save_object_message" xml:space="preserve">
     <value>Объект будет удален!
 Вы хотите выйти?</value>
+  </data>
+  <data name="diagram" xml:space="preserve">
+    <value>Диаграмма</value>
+  </data>
+  <data name="editing" xml:space="preserve">
+    <value>Редактирование</value>
+  </data>
+  <data name="add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="closeWithoutSaving" xml:space="preserve">
+    <value>Закрыть без сохранения?</value>
+  </data>
+  <data name="nameIsEmpty" xml:space="preserve">
+    <value>Имя пусто!</value>
+  </data>
+  <data name="systemNameAlert" xml:space="preserve">
+    <value>Системное имя!</value>
   </data>
 </root>

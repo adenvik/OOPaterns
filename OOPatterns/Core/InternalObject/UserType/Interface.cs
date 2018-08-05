@@ -9,7 +9,7 @@
 
         }
 
-        public Interface(string name) : base(name)
+        public Interface(string name = Core.INTERFACE) : base(name)
         {
 
         }
