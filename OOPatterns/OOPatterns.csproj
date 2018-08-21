@@ -62,22 +62,22 @@
     <Compile Include="Core\Core.cs" />
     <Compile Include="Core\Element.cs" />
     <Compile Include="Core\Helpers\Access.cs" />
-    <Compile Include="Core\Helpers\CanvasHelper.cs" />
     <Compile Include="Core\Helpers\Enums.cs" />
     <Compile Include="Core\Helpers\SystemName.cs" />
     <Compile Include="Core\Helpers\Type.cs" />
     <Compile Include="Core\Helpers\VisualProperties.cs" />
     <Compile Include="Core\InternalObject\UserType\UserType.cs" />
-    <Compile Include="Core\Helpers\IUnique.cs" />
     <Compile Include="Core\Helpers\Unique.cs" />
+    <Compile Include="Core\VisualObjects\Relations\Aggregation.cs" />
+    <Compile Include="Core\VisualObjects\Relations\Composition.cs" />
+    <Compile Include="Core\VisualObjects\Relations\Dependency.cs" />
+    <Compile Include="Core\VisualObjects\Relations\Realization.cs" />
+    <Compile Include="Core\VisualObjects\Relations\Relation.cs" />
     <Compile Include="Core\VisualObjects\VisualObject.cs" />
     <Compile Include="Properties\Resources.ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.ru.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\AddParamObjectWindow.xaml.cs">
-      <DependentUpon>AddParamObjectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Controls\ButtonControl.xaml.cs">
       <DependentUpon>ButtonControl.xaml</DependentUpon>
@@ -85,13 +85,11 @@
     <Compile Include="Windows\Helpers\AnimationHelper.cs" />
     <Compile Include="Windows\Helpers\CanvasHelper.cs" />
     <Compile Include="Windows\Helpers\ContextMenuHelper.cs" />
+    <Compile Include="Windows\Helpers\EditHelper.cs" />
     <Compile Include="Windows\Helpers\NavBarHelper.cs" />
     <Compile Include="Windows\Helpers\ThemeHelper.cs" />
     <Compile Include="Windows\ParamObjectWindow.xaml.cs">
       <DependentUpon>ParamObjectWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\UserTypeConfigurationWindow.xaml.cs">
-      <DependentUpon>UserTypeConfigurationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\VariablesInMethodWindow.xaml.cs">
       <DependentUpon>VariablesInMethodWindow.xaml</DependentUpon>
@@ -124,10 +122,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AddParamObjectWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -150,10 +144,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\Themes\TextStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\UserTypeConfigurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

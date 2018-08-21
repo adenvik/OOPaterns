@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace OOPatterns.Core
 {
+    /// <summary>
+    /// Element of something
+    /// </summary>
     public class Element
     {
+        /// <summary>
+        /// Usertype object
+        /// </summary>
         public UserType UserObject
         {
             get
@@ -18,9 +24,14 @@ namespace OOPatterns.Core
             }
             set
             {
+                VisualObject.DestroyOnCanvas();
                 VisualObject = new VisualObject(value, VisualObject);
             }
         }
+
+        /// <summary>
+        /// Visual representation of usertype object
+        /// </summary>
         public VisualObject VisualObject { get; set; }
     }
 }

@@ -181,4 +181,22 @@ Do you want to get out?</value>
   <data name="closeWithoutSaving" xml:space="preserve">
     <value>Close without saving?</value>
   </data>
+  <data name="aggregation" xml:space="preserve">
+    <value>Aggregation</value>
+  </data>
+  <data name="composition" xml:space="preserve">
+    <value>Composition</value>
+  </data>
+  <data name="dependency" xml:space="preserve">
+    <value>Dependency</value>
+  </data>
+  <data name="realization" xml:space="preserve">
+    <value>Realization</value>
+  </data>
+  <data name="aggregationException" xml:space="preserve">
+    <value>Aggregation can't be applied to the interface</value>
+  </data>
+  <data name="compositionException" xml:space="preserve">
+    <value>Composition can't be applied to the interface</value>
+  </data>
 </root>

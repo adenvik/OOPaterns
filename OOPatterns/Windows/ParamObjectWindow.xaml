@@ -20,7 +20,7 @@
                   BorderThickness="0" Click="Close_Click"/>
         </StackPanel>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Margin="10,30,10,10" MinWidth="340" Height="25">
+            <StackPanel Orientation="Horizontal" Margin="10,30,10,10" MinWidth="330" Height="25">
                 <ComboBox Style="{DynamicResource ComboBoxStyle}" MinWidth="70" ToolTip="Access" Name="AccessCB"/>
                 <ComboBox Style="{DynamicResource ComboBoxStyle}" MinWidth="100" Margin="10,0" ToolTip="Type" Name="TypeCB"/>
                 <TextBox Style="{DynamicResource TextBoxStyle}" MinWidth="140" Margin="0,0,10,0" ToolTip="Name" Name="NameTB"/>

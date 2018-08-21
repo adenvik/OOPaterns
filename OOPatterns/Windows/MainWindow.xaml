@@ -56,7 +56,7 @@
         </Grid>
         <Grid HorizontalAlignment="Right" Margin="0,25,-201,15" Width="200" Name="RightToolbar">
             <Border BorderBrush="{DynamicResource PrimaryForeground}" BorderThickness="1,1,0,1">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Background="{DynamicResource Primary}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Name="ScrollViewer" Background="{DynamicResource Primary}">
                     <StackPanel Orientation="Vertical" Margin="0,10,0,10">
                         <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top">
                             <Label Content="{x:Static p:Resources.name}" FontSize="12" Width="70" Foreground="{DynamicResource PrimaryForeground}"/>
@@ -69,7 +69,7 @@
                         <!--Parents-->
                         <Border BorderThickness="0.5" BorderBrush="Silver" Margin="0,5,0,0">
                             <StackPanel Orientation="Vertical" Height="25" Name="Parents" Margin="5,0">
-                                <StackPanel Orientation="Horizontal" Height="25" MouseDown="Panel_MouseDown">
+                                <StackPanel Orientation="Horizontal" Height="25">
                                     <Label Content="{x:Static p:Resources.parents}" FontSize="12" Width="168" HorizontalContentAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
                                     <Label RenderTransformOrigin=".5,.5" Width="20" Padding="0" Foreground="{DynamicResource PrimaryForeground}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="Parents_Arrow">
                                         <Path Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,2 z" Fill="{DynamicResource PrimaryForeground}"/>
@@ -86,9 +86,55 @@
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
-                                    <ctrl:ButtonControl Width="23" Height="25" FontSize="14" Text="+"/>
+                                    <ctrl:ButtonControl Width="23" Height="25" FontSize="14" Text="+" x:Name="AddParent"/>
                                 </StackPanel>
-                                <ListBox HorizontalAlignment="Left" Height="135" Margin="0,5,0,0" VerticalAlignment="Top" Width="188" Name="Parents_LB" Background="{DynamicResource PrimaryLight}">
+                                <ListView HorizontalAlignment="Left" Height="135" Margin="0,5,0,0" VerticalAlignment="Top" Width="188" Name="Parents_LV" 
+                                          Background="{DynamicResource PrimaryLight}" Foreground="{DynamicResource PrimaryForeground}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridView.Columns>
+                                                <GridViewColumn Width="20">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Image Source="{Binding Image}" Margin="-1" Width="10" Height="10"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Header="{x:Static p:Resources.name}" DisplayMemberBinding="{Binding Name}" Width="130"></GridViewColumn>
+                                            </GridView.Columns>
+                                        </GridView>
+                                    </ListView.View>
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}" >
+                                            <Style.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsSelected" Value="true" />
+                                                        <Condition Property="Selector.IsSelectionActive" Value="true" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Selector.Background" Value="{DynamicResource PrimaryDark}"/>
+                                                    <Setter Property="Selector.BorderThickness" Value="1"/>
+                                                    <Setter Property="Selector.BorderBrush" Value="{DynamicResource PrimaryDark}"/>
+                                                </MultiTrigger>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsSelected" Value="true" />
+                                                        <Condition Property="Selector.IsSelectionActive" Value="false" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Selector.Background" Value="{DynamicResource PrimaryDark}"/>
+                                                    <Setter Property="Selector.BorderThickness" Value="1"/>
+                                                    <Setter Property="Selector.BorderBrush" Value="{DynamicResource PrimaryDark}"/>
+                                                </MultiTrigger>
+                                                <Trigger Property="Control.IsMouseOver" Value="True">
+                                                    <Setter Property="Selector.Background" Value="{DynamicResource Primary}"/>
+                                                    <Setter Property="BorderThickness" Value="1"/>
+                                                    <Setter Property="BorderBrush" Value="{DynamicResource Primary}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                </ListView>
+                                <!--<ListBox HorizontalAlignment="Left" Height="135" Margin="0,5,0,0" VerticalAlignment="Top" Width="188" Name="Parents_LB" Background="{DynamicResource PrimaryLight}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -97,19 +143,20 @@
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
+                                -->
                             </StackPanel>
                         </Border>
                         <!--Variables-->
                         <Border BorderThickness="0.5" BorderBrush="Silver">
                             <StackPanel Orientation="Vertical" Height="25" Name="Variables" Margin="5,0">
-                                <StackPanel Orientation="Horizontal" Height="25" MouseDown="Panel_MouseDown">
+                                <StackPanel Orientation="Horizontal" Height="25">
                                     <Label Content="{x:Static p:Resources.variables}" FontSize="12" Width="168" HorizontalContentAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
                                     <Label RenderTransformOrigin=".5,.5" Width="20" Padding="0" Foreground="{DynamicResource PrimaryForeground}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Name="Variables_Arrow">
                                         <Path Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,2 z" Fill="{DynamicResource PrimaryForeground}"/>
                                     </Label>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Height="25" Margin="0,5,0,0">
-                                    <ctrl:ButtonControl Width="188" Height="25" Text="{x:Static p:Resources.add_variable}" Click="AddVariable_Click"/>
+                                    <ctrl:ButtonControl Width="188" Height="25" Text="{x:Static p:Resources.add_variable}" x:Name="AddVariable"/>
                                 </StackPanel>
                                 <ListView HorizontalAlignment="Left" Height="135" Margin="0,5,0,0" VerticalAlignment="Top" Width="188" Name="Variables_LV" 
                                           Background="{DynamicResource PrimaryLight}" Foreground="{DynamicResource PrimaryForeground}">
@@ -122,20 +169,49 @@
                                             </GridView.Columns>
                                         </GridView>
                                     </ListView.View>
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}" >
+                                            <Style.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsSelected" Value="true" />
+                                                        <Condition Property="Selector.IsSelectionActive" Value="true" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Selector.Background" Value="{DynamicResource PrimaryDark}"/>
+                                                    <Setter Property="Selector.BorderThickness" Value="1"/>
+                                                    <Setter Property="Selector.BorderBrush" Value="{DynamicResource PrimaryDark}"/>
+                                                </MultiTrigger>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsSelected" Value="true" />
+                                                        <Condition Property="Selector.IsSelectionActive" Value="false" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Selector.Background" Value="{DynamicResource PrimaryDark}"/>
+                                                    <Setter Property="Selector.BorderThickness" Value="1"/>
+                                                    <Setter Property="Selector.BorderBrush" Value="{DynamicResource PrimaryDark}"/>
+                                                </MultiTrigger>
+                                                <Trigger Property="Control.IsMouseOver" Value="True">
+                                                    <Setter Property="Selector.Background" Value="{DynamicResource Primary}"/>
+                                                    <Setter Property="BorderThickness" Value="1"/>
+                                                    <Setter Property="BorderBrush" Value="{DynamicResource Primary}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
                                 </ListView>
                             </StackPanel>
                         </Border>
                         <!--Methods-->
                         <Border BorderThickness="0.5" BorderBrush="Silver">
                             <StackPanel Orientation="Vertical" Height="25" Name="Methods" Margin="5,0">
-                                <StackPanel Orientation="Horizontal" Height="25" MouseDown="Panel_MouseDown">
+                                <StackPanel Orientation="Horizontal" Height="25">
                                     <Label Content="{x:Static p:Resources.methods}" FontSize="12" Width="168" HorizontalContentAlignment="Center" Foreground="{DynamicResource PrimaryForeground}"/>
                                     <Label RenderTransformOrigin=".5,.5" Width="20" Padding="0" Foreground="{DynamicResource PrimaryForeground}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Name="Methods_Arrow">
                                         <Path Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,2 z" Fill="{DynamicResource PrimaryForeground}"/>
                                     </Label>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Height="25" Margin="0,5,0,0">
-                                    <ctrl:ButtonControl Width="188" Height="25" Text="{x:Static p:Resources.add_method}" Click="AddMethod_Click"/>
+                                    <ctrl:ButtonControl Width="188" Height="25" Text="{x:Static p:Resources.add_method}" x:Name="AddMethod"/>
                                 </StackPanel>
                                 <ListView HorizontalAlignment="Left" Height="135" Margin="0,5,0,0" VerticalAlignment="Top" Width="188" Name="Methods_LV" 
                                           Background="{DynamicResource PrimaryLight}"  Foreground="{DynamicResource PrimaryForeground}">
@@ -151,29 +227,13 @@
                                 </ListView>
                             </StackPanel>
                         </Border>
+                        <Border BorderThickness="0.5" BorderBrush="Silver">
+                            <ctrl:ButtonControl Text="{x:Static p:Resources.delete}" Width="188" Height="25" x:Name="DeleteButton" Margin="0,5" />
+                        </Border>
                     </StackPanel>
                 </ScrollViewer>
             </Border>
         </Grid>
-        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="170,25,0,15" Background="Silver" Name="ElementsView">
-            <!--
-            <Canvas.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="{x:Static p:Resources.add}">
-                        <MenuItem Header="class" Click="ElementsViewContextMenuItem_Click">
-                            <MenuItem.Icon>
-                                <Image Source="/Images/class_ico.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Header="interface" Click="ElementsViewContextMenuItem_Click">
-                            <MenuItem.Icon>
-                                <Image Source="/Images/interface_ico.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </MenuItem>
-                </ContextMenu>
-            </Canvas.ContextMenu>
-            -->
-        </Canvas>
+        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="170,25,0,15" Background="Silver" Name="ElementsView"/>
     </Grid>
 </Window>

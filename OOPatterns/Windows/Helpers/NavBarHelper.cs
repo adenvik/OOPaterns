@@ -10,11 +10,29 @@ using System.Windows.Media;
 
 namespace OOPatterns.Windows.Helpers
 {
+    /// <summary>
+    /// Helper for working with navigation bar
+    /// </summary>
     public class NavBarHelper
     {
+        /// <summary>
+        /// Event, fired during the transition
+        /// </summary>
         public EventHandler OnNavItemClick;
 
+        /// <summary>
+        /// Whether the transition fired programmatically
+        /// </summary>
+        private bool IsProgrammatically = false;
+
+        /// <summary>
+        /// Array of navigation panels
+        /// </summary>
         UIElement[] NavPanels;
+
+        /// <summary>
+        /// Current panel
+        /// </summary>
         UIElement Selected;
 
         public NavBarHelper(params UIElement[] elements)
@@ -24,7 +42,13 @@ namespace OOPatterns.Windows.Helpers
             InitEvents();
         }
 
-        public NavBarHelper EnablePanel(UIElement panel)
+        /// <summary>
+        /// Activate navigation panel, and maybe fired navigation
+        /// </summary>
+        /// <param name="panel">Panel</param>
+        /// <param name="navigate"></param>
+        /// <returns></returns>
+        public NavBarHelper EnablePanel(UIElement panel, bool navigate = false)
         {
             foreach(UIElement p in NavPanels)
             {
@@ -35,9 +59,15 @@ namespace OOPatterns.Windows.Helpers
                     break;
                 }
             }
+            if (navigate) Navigate(panel);
             return this;
         }
 
+        /// <summary>
+        /// Disable navigation panel
+        /// </summary>
+        /// <param name="panel">Panel</param>
+        /// <returns></returns>
         public NavBarHelper DisablePanel(UIElement panel)
         {
             foreach (UIElement p in NavPanels)
@@ -52,6 +82,10 @@ namespace OOPatterns.Windows.Helpers
             return this;
         }
 
+        /// <summary>
+        /// Fired click event on panel
+        /// </summary>
+        /// <param name="panel"></param>
         public void Navigate(UIElement panel)
         {
             foreach (UIElement p in NavPanels)
@@ -60,12 +94,16 @@ namespace OOPatterns.Windows.Helpers
                 {
                     MouseButtonEventArgs arg = new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left);
                     arg.RoutedEvent = StackPanel.MouseLeftButtonDownEvent;
+                    IsProgrammatically = true;
                     p.RaiseEvent(arg);
                     break;
                 }
             }
         }
 
+        /// <summary>
+        /// Added events on panels
+        /// </summary>
         private void InitEvents()
         {
             for(int i = 0; i < NavPanels.Length; i++)
@@ -98,7 +136,15 @@ namespace OOPatterns.Windows.Helpers
 
                     Selected = sender as UIElement;
 
-                    OnNavItemClick?.Invoke(Selected, EventArgs.Empty);
+                    if (IsProgrammatically)
+                    {
+                        OnNavItemClick?.Invoke(Selected, null);
+                        IsProgrammatically = false;
+                    }
+                    else
+                    {
+                        OnNavItemClick?.Invoke(Selected, EventArgs.Empty);
+                    }
                 };
             }
         }

@@ -97,6 +97,24 @@ namespace OOPatterns.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Aggregation.
+        /// </summary>
+        public static string aggregation {
+            get {
+                return ResourceManager.GetString("aggregation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Aggregation can&apos;t be applied to the interface.
+        /// </summary>
+        public static string aggregationException {
+            get {
+                return ResourceManager.GetString("aggregationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Close without saving?.
         /// </summary>
         public static string closeWithoutSaving {
@@ -106,11 +124,38 @@ namespace OOPatterns.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Composition.
+        /// </summary>
+        public static string composition {
+            get {
+                return ResourceManager.GetString("composition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Composition can&apos;t be applied to the interface.
+        /// </summary>
+        public static string compositionException {
+            get {
+                return ResourceManager.GetString("compositionException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Delete.
         /// </summary>
         public static string delete {
             get {
                 return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Dependency.
+        /// </summary>
+        public static string dependency {
+            get {
+                return ResourceManager.GetString("dependency", resourceCulture);
             }
         }
         
@@ -192,6 +237,15 @@ namespace OOPatterns.Properties {
         public static string parents {
             get {
                 return ResourceManager.GetString("parents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Realization.
+        /// </summary>
+        public static string realization {
+            get {
+                return ResourceManager.GetString("realization", resourceCulture);
             }
         }
         

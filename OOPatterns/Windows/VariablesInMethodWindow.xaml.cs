@@ -66,7 +66,7 @@ namespace OOPatterns.Windows
         {
             var button = sender as ButtonControl;
             var variable = button.DataContext as Variable;
-            var index = method.Parameters.FindIndex(v => v.Name == variable.Name);
+            var index = method.Parameters.FindIndex(v => v == variable);
             method.Parameters.Remove(variable);
             Variables_LV.Items.RemoveAt(index);
         }

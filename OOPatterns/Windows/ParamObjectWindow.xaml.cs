@@ -1,18 +1,8 @@
 ﻿using OOPatterns.Core.Helpers;
 using OOPatterns.Core.InternalObject.ParamObject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OOPatterns.Windows
 {
@@ -28,6 +18,7 @@ namespace OOPatterns.Windows
         {
             InitializeComponent();
             paramObject = obj;
+            Load();
 
             switch (obj)
             {
@@ -35,6 +26,8 @@ namespace OOPatterns.Windows
                     this.Width = 350;
                     this.Height = 65;
                     Title.Content = Properties.Resources.add_variable;
+                    TypeCB.Items.Remove(Core.Helpers.Type.VOID);
+                    if (TypeCB.SelectedIndex == -1) TypeCB.SelectedIndex = 0;
                     break;
                 case Method m:
                     this.Width = 500;
@@ -48,7 +41,6 @@ namespace OOPatterns.Windows
                 this.Width -= 70;
             }
 
-            Load();
         }
 
         private void Load()
@@ -151,10 +143,7 @@ namespace OOPatterns.Windows
             {
                 DragMove();
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception) { }
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

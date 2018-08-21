@@ -181,4 +181,22 @@
   <data name="systemNameAlert" xml:space="preserve">
     <value>Системное имя!</value>
   </data>
+  <data name="aggregation" xml:space="preserve">
+    <value>Агреграция</value>
+  </data>
+  <data name="composition" xml:space="preserve">
+    <value>Композиция</value>
+  </data>
+  <data name="dependency" xml:space="preserve">
+    <value>Зависимость</value>
+  </data>
+  <data name="realization" xml:space="preserve">
+    <value>Реализация</value>
+  </data>
+  <data name="aggregationException" xml:space="preserve">
+    <value>Агрегация не может быть применена к интерфейсу</value>
+  </data>
+  <data name="compositionException" xml:space="preserve">
+    <value>Композиция не может быть применена к интерфейсу</value>
+  </data>
 </root>
