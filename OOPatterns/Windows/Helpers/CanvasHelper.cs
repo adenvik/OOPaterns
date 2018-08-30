@@ -124,6 +124,16 @@ namespace OOPatterns.Windows.Helpers
         /// </summary>
         private Line line;
 
+        /// <summary>
+        /// Logic on canvas when relation adding with help of DiagramToolbar
+        /// </summary>
+        private bool PreparationRelation = false;
+
+        /// <summary>
+        /// Event fired after click on canvas, if PreparationRelation is True
+        /// </summary>
+        public EventHandler OnRelationClick;
+
         public CanvasHelper(Canvas canvas)
         {
             Canvas = canvas;
@@ -162,6 +172,16 @@ namespace OOPatterns.Windows.Helpers
             line.Stroke = Core.Core.GetInstance().ThemeHelper.NormalItemBrush;
             line.Opacity = 0.2d;
             Canvas.Children.Add(line);
+        }
+
+        /// <summary>
+        /// Triggered logic for the adding relation
+        /// </summary>
+        /// <param name="name"></param>
+        public void PreparateRelation(string name)
+        {
+            RelationName = name;
+            PreparationRelation = true;
         }
 
         /// <summary>
@@ -355,6 +375,20 @@ namespace OOPatterns.Windows.Helpers
             if (!(e.OriginalSource is Canvas))
             {
                 var elem = e.OriginalSource as FrameworkElement;
+                if (PreparationRelation)
+                {
+                    PreparationRelation = false;
+                    var voElem = Objects.Find(obj => obj.Name == elem.Name);
+                    if (voElem != null)
+                    {
+                        From = voElem;
+                        StartPoint = e.GetPosition(Canvas);
+                        AddRelation(RelationName);
+                    }
+                    else ClearState();
+                    OnRelationClick?.Invoke(this, EventArgs.Empty);
+                    return;
+                }
                 if (line != null)
                 {
                     To = Objects.Find(obj => obj.Name == elem.Name);
@@ -365,7 +399,7 @@ namespace OOPatterns.Windows.Helpers
                     }
                     else
                     {
-                        CreateRelation();
+                        if(To != From) CreateRelation();
                         Canvas.Children.Remove(line);
                         line = null;
                     }
@@ -399,11 +433,21 @@ namespace OOPatterns.Windows.Helpers
             }
             else
             {
-                Deselect();
-                Canvas.Children.Remove(line);
-                From = null;
-                line = null;
+                ClearState();
+                if (PreparationRelation)
+                {
+                    PreparationRelation = false;
+                    OnRelationClick?.Invoke(this, EventArgs.Empty);
+                }
             }
+        }
+
+        public void ClearState()
+        {
+            Deselect();
+            if (line != null) Canvas.Children.Remove(line);
+            From = null;
+            line = null;
         }
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
@@ -417,6 +461,7 @@ namespace OOPatterns.Windows.Helpers
 
         private void Canvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            ClearState();
             if (!(e.OriginalSource is Canvas))
             {
                 var elem = Objects.Find(obj => obj.Name == (e.OriginalSource as FrameworkElement).Name);

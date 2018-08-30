@@ -60,7 +60,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\Core.cs" />
-    <Compile Include="Core\Element.cs" />
     <Compile Include="Core\Helpers\Access.cs" />
     <Compile Include="Core\Helpers\Enums.cs" />
     <Compile Include="Core\Helpers\SystemName.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="Windows\Helpers\AnimationHelper.cs" />
     <Compile Include="Windows\Helpers\CanvasHelper.cs" />
     <Compile Include="Windows\Helpers\ContextMenuHelper.cs" />
+    <Compile Include="Windows\Helpers\DiagramHelper.cs" />
     <Compile Include="Windows\Helpers\EditHelper.cs" />
     <Compile Include="Windows\Helpers\NavBarHelper.cs" />
     <Compile Include="Windows\Helpers\ThemeHelper.cs" />

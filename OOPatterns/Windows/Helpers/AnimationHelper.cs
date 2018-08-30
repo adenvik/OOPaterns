@@ -28,7 +28,7 @@ namespace OOPatterns.Windows.Helpers
             {
                 Left, Top, Right, Bottom
             }
-            public ThicknessAnimationProperty? ThicknessProperty { get; set; } = null;
+            public ThicknessAnimationProperty[] ThicknessProperty { get; set; } = null;
 
             /// <summary>
             /// Window animation property
@@ -43,12 +43,12 @@ namespace OOPatterns.Windows.Helpers
             /// <summary>
             /// Start position of the element
             /// </summary>
-            public double StartValue { get; set; }
+            public double[] StartValue { get; set; }
 
             /// <summary>
             /// End position of the element
             /// </summary>
-            public double EndValue { get; set; }
+            public double[] EndValue { get; set; }
 
             /// <summary>
             /// Time of animation
@@ -74,19 +74,39 @@ namespace OOPatterns.Windows.Helpers
                 if (ThicknessProperty != null)
                 {
                     var thickness = new Thickness();
-                    thickness.Left = ThicknessProperty == ThicknessAnimationProperty.Left ? State ? EndValue : StartValue : Element.Margin.Left;
-                    thickness.Top = ThicknessProperty == ThicknessAnimationProperty.Top ? State ? EndValue : StartValue : Element.Margin.Top;
-                    thickness.Right = ThicknessProperty == ThicknessAnimationProperty.Right ? State ? EndValue : StartValue : Element.Margin.Right;
-                    thickness.Bottom = ThicknessProperty == ThicknessAnimationProperty.Bottom ? State ? EndValue : StartValue : Element.Margin.Bottom;
 
-                    animation = new ThicknessAnimation(thickness, Time);
+                    thickness.Left = Element.Margin.Left;
+                    thickness.Top = Element.Margin.Top;
+                    thickness.Right = Element.Margin.Right;
+                    thickness.Bottom = Element.Margin.Bottom;
+
+                    for (int i = 0; i < ThicknessProperty.Length; i++)
+                    {
+                        switch (ThicknessProperty[i])
+                        {
+                            case ThicknessAnimationProperty.Left:
+                                thickness.Left = State ? EndValue[i] : StartValue[i];
+                                break;
+                            case ThicknessAnimationProperty.Top:
+                                thickness.Top = State ? EndValue[i] : StartValue[i];
+                                break;
+                            case ThicknessAnimationProperty.Right:
+                                thickness.Right = State ? EndValue[i] : StartValue[i];
+                                break;
+                            case ThicknessAnimationProperty.Bottom:
+                                thickness.Bottom = State ? EndValue[i] : StartValue[i];
+                                break;
+                        }
+                    }
+
+            animation = new ThicknessAnimation(thickness, Time);
                 }
                 else
                 {
                     animation = new DoubleAnimation
                     {
-                        From = State ? StartValue : EndValue,
-                        To = State ? EndValue : StartValue,
+                        From = State ? StartValue[0] : EndValue[0],
+                        To = State ? EndValue[0] : StartValue[0],
                         Duration = Time
                     };
                 }
@@ -133,19 +153,23 @@ namespace OOPatterns.Windows.Helpers
         {
             Add(new AnimationDetails
             {
-                ThicknessProperty = AnimationDetails.ThicknessAnimationProperty.Right,
+                ThicknessProperty = new AnimationDetails.ThicknessAnimationProperty[] 
+                {
+                    AnimationDetails.ThicknessAnimationProperty.Left,
+                    AnimationDetails.ThicknessAnimationProperty.Right
+                },
                 Key = Window.RightToolbar.Name,
-                StartValue = 0,
-                EndValue = 200,
+                StartValue = new double[] { 261, 0 },
+                EndValue = new double[] { 169, 200 },
                 AnimateProperty = FrameworkElement.MarginProperty,
                 Element = Window.ElementsView
             });
             Add(new AnimationDetails
             {
-                ThicknessProperty = AnimationDetails.ThicknessAnimationProperty.Right,
+                ThicknessProperty = new AnimationDetails.ThicknessAnimationProperty[] { AnimationDetails.ThicknessAnimationProperty.Right },
                 Key = Window.RightToolbar.Name,
-                StartValue = -201,
-                EndValue = 0,
+                StartValue = new double[] { -201 },
+                EndValue = new double[] { 0 },
                 AnimateProperty = FrameworkElement.MarginProperty,
                 Element = Window.RightToolbar
             });
@@ -153,8 +177,8 @@ namespace OOPatterns.Windows.Helpers
             Add(new AnimationDetails
             {
                 Key = Window.Parents.Name,
-                StartValue = 25,
-                EndValue = 200,
+                StartValue = new double[] { 25 },
+                EndValue = new double[] { 200 },
                 AnimateProperty = FrameworkElement.HeightProperty,
                 Element = Window.Parents
             });
@@ -162,16 +186,16 @@ namespace OOPatterns.Windows.Helpers
             Add(new AnimationDetails
             {
                 Key = Window.Parents.Name,
-                StartValue = 0,
-                EndValue = 180,
+                StartValue = new double[] { 0 },
+                EndValue = new double[] { 180 },
                 AnimateProperty = RotateTransform.AngleProperty,
                 Element = Window.Parents_Arrow.RenderTransform
             });
             Add(new AnimationDetails
             {
                 Key = Window.Variables.Name,
-                StartValue = 25,
-                EndValue = 200,
+                StartValue = new double[] { 25 },
+                EndValue = new double[] { 200 },
                 AnimateProperty = FrameworkElement.HeightProperty,
                 Element = Window.Variables
             });
@@ -179,16 +203,16 @@ namespace OOPatterns.Windows.Helpers
             Add(new AnimationDetails
             {
                 Key = Window.Variables.Name,
-                StartValue = 0,
-                EndValue = 180,
+                StartValue = new double[] { 0 },
+                EndValue = new double[] { 180 },
                 AnimateProperty = RotateTransform.AngleProperty,
                 Element = Window.Variables_Arrow.RenderTransform
             });
             Add(new AnimationDetails
             {
                 Key = Window.Methods.Name,
-                StartValue = 25,
-                EndValue = 200,
+                StartValue = new double[] { 25 },
+                EndValue = new double[] { 200 },
                 AnimateProperty = FrameworkElement.HeightProperty,
                 Element = Window.Methods
             });
@@ -196,8 +220,8 @@ namespace OOPatterns.Windows.Helpers
             Add(new AnimationDetails
             {
                 Key = Window.Methods.Name,
-                StartValue = 0,
-                EndValue = 180,
+                StartValue = new double[] { 0 },
+                EndValue = new double[] { 180 },
                 AnimateProperty = RotateTransform.AngleProperty,
                 Element = Window.Methods_Arrow.RenderTransform
             });

@@ -10,23 +10,175 @@
         BorderBrush="{DynamicResource Primary}"
         BorderThickness="1"
         AllowsTransparency="True"
-        Title="MainWindow" Height="600" Width="1100" MinWidth="500" MinHeight="300" ResizeMode="CanResizeWithGrip" WindowStyle="None" WindowStartupLocation="CenterScreen" Icon="/OOPatterns;component/Images/logo.png">
+        Title="MainWindow" Height="600" Width="1100" MinWidth="800" MinHeight="350" ResizeMode="CanResizeWithGrip" WindowStyle="None" WindowStartupLocation="CenterScreen" Icon="/OOPatterns;component/Images/logo.png">
     <Grid>
         <Border BorderBrush="{DynamicResource PrimaryForeground}" BorderThickness="0,1,1,1">
         <Grid Width="168" HorizontalAlignment="Left" Background="{DynamicResource Primary}" Name="LeftToolbar" Margin="0,25,0,15">
             <Border Height="40" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Name="Diagram" Background="{DynamicResource PrimaryDark}">
                     <Image Width="40" Height="40"/>
-                    <Label Height="40" Content="Диаграмма" Foreground="{DynamicResource PrimaryForeground}" FontSize="15" VerticalContentAlignment="Center"/>
+                    <Label Height="40" Content="{x:Static p:Resources.diagram}" Foreground="{DynamicResource PrimaryForeground}" FontSize="15" VerticalContentAlignment="Center"/>
                 </StackPanel>
             </Border>
             <Border Height="40" VerticalAlignment="Top" Margin="0,40,0,0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Name="Edit" IsEnabled="False">
                     <Image Width="40" Height="40"/>
-                    <Label Height="40" Content="Редактирование" Foreground="{DynamicResource DisabledForeground}" FontSize="15" VerticalContentAlignment="Center"/>
+                    <Label Height="40" Content="{x:Static p:Resources.editing}" Foreground="{DynamicResource DisabledForeground}" FontSize="15" VerticalContentAlignment="Center"/>
                 </StackPanel>
             </Border>
         </Grid>
+        </Border>
+        <Border BorderBrush="{DynamicResource PrimaryForeground}" BorderThickness="0,1,1,1">
+            <Grid HorizontalAlignment="Left" Margin="169,25,0,15" Width="90" Background="{DynamicResource Primary}" Name="DiagramToolbar">
+                <!--Class-->
+                <Path Stroke="{DynamicResource PrimaryDark}" Fill="{DynamicResource ClassGradient}" Name="ClassPath">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigureCollection>
+                                <PathFigure StartPoint="10,10">
+                                    <LineSegment Point="80,10"/>
+                                    <LineSegment Point="80,25"/>
+                                    <LineSegment Point="10,25"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="10,25">
+                                    <LineSegment Point="80,25"/>
+                                    <LineSegment Point="80,45"/>
+                                    <LineSegment Point="10,45"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="10,45">
+                                    <LineSegment Point="80,45"/>
+                                    <LineSegment Point="80,65"/>
+                                    <LineSegment Point="10,65"/>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="class" Margin="15,9,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource Primary}" FontSize="11"/>
+                <TextBlock Text="{x:Static p:Resources.variables}" Margin="15,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource Primary}" FontSize="8"/>
+                <TextBlock Text="{x:Static p:Resources.methods}" Margin="15,45,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource Primary}" FontSize="8"/>
+                <!--Interface-->
+                <Path Stroke="{DynamicResource PrimaryDark}" Fill="{DynamicResource InterfaceGradient}" Name="InterfacePath">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigureCollection>
+                                <PathFigure StartPoint="10,80">
+                                    <LineSegment Point="80,80"/>
+                                    <LineSegment Point="80,95"/>
+                                    <LineSegment Point="10,95"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="10,95">
+                                    <LineSegment Point="80,95"/>
+                                    <LineSegment Point="80,115"/>
+                                    <LineSegment Point="10,115"/>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="interface" Margin="15,79,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource Primary}" FontSize="11"/>
+                <TextBlock Text="{x:Static p:Resources.methods}" Margin="15,95,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource Primary}" FontSize="8"/>
+                <!--Relations-->
+                <!--Aggregation-->
+                <Path Stroke="{DynamicResource PrimaryForeground}" Fill="Transparent" Name="AggregationPath">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigureCollection>
+                                <PathFigure StartPoint="10,155">
+                                    <LineSegment Point="20,155"/>
+                                    <LineSegment Point="50,145"/>
+                                    <LineSegment Point="60,145"/>
+                                    <LineSegment Point="70, 140"/>
+                                    <LineSegment Point="80,145"/>
+                                    <LineSegment Point="70, 150"/>
+                                    <LineSegment Point="60, 145"/>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="{x:Static p:Resources.aggregation}" Margin="10,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource PrimaryForeground}" FontSize="9"/>
+                <!--Composition-->
+                <Path Stroke="{DynamicResource PrimaryForeground}" Fill="{DynamicResource PrimaryForeground}" Name="CompositionPath">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigureCollection>
+                                <PathFigure StartPoint="10,195">
+                                    <LineSegment Point="20,195"/>
+                                    <LineSegment Point="50,185"/>
+                                    <LineSegment Point="60,185"/>
+                                    <LineSegment Point="70, 180"/>
+                                    <LineSegment Point="80,185"/>
+                                    <LineSegment Point="70, 190"/>
+                                    <LineSegment Point="60, 185"/>
+                                    <LineSegment Point="50, 185"/>
+                                    <LineSegment Point="20,195"/>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="{x:Static p:Resources.composition}" Margin="10,170,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource PrimaryForeground}" FontSize="9"/>
+                <!--Realization-->
+                <Path Stroke="{DynamicResource PrimaryForeground}" Fill="Transparent" Name="RealizationPath">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigureCollection>
+                                <PathFigure StartPoint="10,225">
+                                    <LineSegment Point="20,225"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="25,225">
+                                    <LineSegment Point="35,225"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="40,225">
+                                    <LineSegment Point="50,225"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="55,225">
+                                    <LineSegment Point="65,225"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="70,225">
+                                    <LineSegment Point="70,220"/>
+                                    <LineSegment Point="80,225"/>
+                                    <LineSegment Point="70,230"/>
+                                    <LineSegment Point="70,225"/>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="{x:Static p:Resources.realization}" Margin="10,205,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource PrimaryForeground}" FontSize="9"/>
+                <!--Dependecy-->
+                <Path Stroke="{DynamicResource PrimaryForeground}" Fill="Transparent" Name="DependecyPath">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigureCollection>
+                                <PathFigure StartPoint="10,265">
+                                    <LineSegment Point="20,265"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="25,265">
+                                    <LineSegment Point="35,265"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="40,265">
+                                    <LineSegment Point="50,265"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="55,265">
+                                    <LineSegment Point="65,265"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="70,265">
+                                    <LineSegment Point="80,265"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="80,265">
+                                    <LineSegment Point="70,260"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="80,265">
+                                    <LineSegment Point="70,270"/>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="{x:Static p:Resources.dependency}" Margin="10,245,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource PrimaryForeground}" FontSize="9"/>
+            </Grid>
         </Border>
         <Grid Height="25" VerticalAlignment="Top" Background="{DynamicResource Primary}" Name="TopToolbar" MouseLeftButtonDown="TopToolbar_MouseLeftButtonDown">
             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0" Content="OOPatterns" Foreground="{DynamicResource PrimaryForeground}" FontSize="12" FontFamily="Copperplate Gothic Bold" Name="Name" MouseLeftButtonDown="Name_MouseLeftButtonDown">
@@ -234,6 +386,6 @@
                 </ScrollViewer>
             </Border>
         </Grid>
-        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="170,25,0,15" Background="Silver" Name="ElementsView"/>
+        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="261,25,0,15" Background="Silver" Name="ElementsView"/>
     </Grid>
 </Window>

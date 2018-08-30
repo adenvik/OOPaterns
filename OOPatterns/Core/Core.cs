@@ -29,6 +29,7 @@ namespace OOPatterns.Core
         public NavBarHelper NavBarHelper { get; }
         public ContextMenuHelper ContextMenuHelper { get; }
         public AnimationHelper AnimationHelper { get; }
+        public DiagramHelper DiagramHelper { get; }
 
         /// <summary>
         /// List of objects on the diagram
@@ -59,15 +60,18 @@ namespace OOPatterns.Core
                 AnimationHelper = new AnimationHelper(window);
                 ContextMenuHelper = new ContextMenuHelper(window);
                 EditHelper = new EditHelper(window);
+                DiagramHelper = new DiagramHelper(window);
 
                 ContextMenuHelper.OnMenuItemClick += OnMenuItemClick;
                 NavBarHelper.OnNavItemClick += OnNavItemClick;
                 CanvasHelper.OnSelectedChanged += OnSelectedItemChanged;
                 CanvasHelper.OnDoubleClick += OnItemDoubleClick;
+                CanvasHelper.OnRelationClick += OnRelationClick;
                 EditHelper.OnDataChanged += OnDataChanged;
+                DiagramHelper.OnDiagramToolbarItemClick += OnDiagramToolbarItemClick;
             }
         }
-        
+
         private void OnDataChanged(object sender, EventArgs e)
         {
             if(Selected != EditHelper.CurrentObject)
@@ -160,7 +164,7 @@ namespace OOPatterns.Core
             CanvasHelper.Clear(true);
             CanvasHelper.SelectedItem.IsCentered = true;
             CanvasHelper.ReDraw();
-            CanvasHelper.SelectedItem.X -= Window.RightToolbar.Width / 2d;
+            CanvasHelper.SelectedItem.X -= Window.RightToolbar.Width / 2d - Window.DiagramToolbar.Width / 2d;
 
             Selected = CanvasHelper.SelectedItem.Object;
             EditHelper.CurrentObject = Selected;
@@ -209,6 +213,43 @@ namespace OOPatterns.Core
                     PreparationEdit();
                 }
             }
+        }
+
+        private void OnDiagramToolbarItemClick(object sender, EventArgs e)
+        {
+            var item = (DiagramHelper.DiagramItem) sender;
+            switch (item)
+            {
+                case DiagramHelper.DiagramItem.CLASS:
+                    CanvasHelper.Add(new VisualObject(new Class(), CanvasHelper.Canvas));
+                    PreparationEdit();
+                    break;
+                case DiagramHelper.DiagramItem.INTERFACE:
+                    CanvasHelper.Add(new VisualObject(new Interface(), CanvasHelper.Canvas));
+                    PreparationEdit();
+                    break;
+                case DiagramHelper.DiagramItem.AGGREAGTION:
+                    CanvasHelper.ClearState();
+                    CanvasHelper.PreparateRelation(Properties.Resources.aggregation);
+                    break;
+                case DiagramHelper.DiagramItem.COMPOSITION:
+                    CanvasHelper.ClearState();
+                    CanvasHelper.PreparateRelation(Properties.Resources.composition);
+                    break;
+                case DiagramHelper.DiagramItem.REALIZATION:
+                    CanvasHelper.ClearState();
+                    CanvasHelper.PreparateRelation(Properties.Resources.realization);
+                    break;
+                case DiagramHelper.DiagramItem.DEPENDENCY:
+                    CanvasHelper.ClearState();
+                    CanvasHelper.PreparateRelation(Properties.Resources.dependency);
+                    break;
+            }
+        }
+
+        private void OnRelationClick(object sender, EventArgs e)
+        {
+            DiagramHelper.ClearSelected();
         }
 
         public static Core GetInstance(MainWindow window = null)

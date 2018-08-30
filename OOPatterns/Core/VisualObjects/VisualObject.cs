@@ -302,14 +302,15 @@ namespace OOPatterns.Core.VisualObjects
         /// </summary>
         public void Destroy(Action<VisualObject> reDraw)
         {
-            DestroyOnCanvas();
             for(int i = 0; i < Relations.Count; i++)
             {
-                var obj = Relations[i].To;
+                var relation = Relations[i];
                 Relations[i].Destroy();
-                reDraw(obj);
+                reDraw(relation.To);
+                reDraw(relation.From);
                 i--;
             }
+            DestroyOnCanvas();
         }
 
         /// <summary>

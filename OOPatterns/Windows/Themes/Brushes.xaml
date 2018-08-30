@@ -16,14 +16,14 @@
     <SolidColorBrush x:Key="OverSystemButtonForeground" Color="White" />
     <SolidColorBrush x:Key="OverCloseButton" Color="#FF3939" />
 
-    <LinearGradientBrush x:Key="ClassGradient" StartPoint="0,0" EndPoint="0,1" Opacity="0.5">
+    <LinearGradientBrush x:Key="ClassGradient" StartPoint="0,0" EndPoint="0,1" Opacity="1">
         <GradientStop Color="White" Offset="0"/>
         <GradientStop Color="#87bcf2" Offset="1.2" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="InterfaceGradient" StartPoint="0,0" EndPoint="0,1" Opacity="0.5">
+    <LinearGradientBrush x:Key="InterfaceGradient" StartPoint="0,0" EndPoint="0,1" Opacity="1">
         <GradientStop Color="White" Offset="0"/>
-        <GradientStop Color="Orange" Offset="1.2" />
+        <GradientStop Color="#FFC251" Offset="1.2" />
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="SelectedItemBrush" Color="#12b76f" Opacity="0.7"/>
