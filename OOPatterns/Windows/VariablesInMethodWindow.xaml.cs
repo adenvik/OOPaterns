@@ -73,11 +73,7 @@ namespace OOPatterns.Windows
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                DragMove();
-            }
-            catch (Exception) { }
+            if (e.OriginalSource is Grid) DragMove();
         }
     }
 }

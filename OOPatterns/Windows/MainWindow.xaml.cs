@@ -36,7 +36,7 @@ namespace OOPatterns
 
         private void TopToolbar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.OriginalSource is Grid) DragMove();
         }
 
         private void Hide_Click(object sender, RoutedEventArgs e)

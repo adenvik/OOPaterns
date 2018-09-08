@@ -11,9 +11,9 @@
         Title="VariablesInMethodWindow" Height="400" Width="400" WindowStyle="None" ResizeMode="NoResize" Background="{DynamicResource Primary}" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Height="25" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Переменные метода" Foreground="{DynamicResource PrimaryForeground}" FontFamily="{DynamicResource PrimaryFontFamily}" Name="Title"/>
-        <StackPanel Height="25" VerticalAlignment="Top" Background="Transparent" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
+        <Grid Height="25" VerticalAlignment="Top" Background="Transparent" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
             <ctrl:ButtonControl Height="25" Width="25" HorizontalAlignment="Right" Text="x" VerticalAlignment="Top" BorderThickness="0" Background="{DynamicResource SystemButton}" NormalBackground="{DynamicResource SystemButton}" MouseOverBackground="{DynamicResource OverCloseButton}" Click="Close_Click"/>
-        </StackPanel>
+        </Grid>
         <StackPanel Orientation="Vertical" Margin="10,40,10,10">
             <ListView Height="310" Name="Variables_LV">
                 <ListView.View>

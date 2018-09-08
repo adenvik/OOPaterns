@@ -14,11 +14,11 @@
         WindowStartupLocation="CenterScreen" Closing="Window_Closing" AllowsTransparency="True">
     <Grid>
         <Label Height="25" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Добавление переменной" Foreground="{DynamicResource PrimaryForeground}" FontFamily="{DynamicResource PrimaryFontFamily}" Name="Title"/>
-        <StackPanel Height="25" VerticalAlignment="Top" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Background="Transparent">
+        <Grid Height="25" VerticalAlignment="Top" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Background="Transparent">
             <ctrl:ButtonControl Height="25" Width="25" HorizontalAlignment="Right" Text="x" VerticalAlignment="Top" 
                   Background="{DynamicResource SystemButton}" NormalBackground="{DynamicResource SystemButton}" MouseOverBackground="{DynamicResource OverCloseButton}" 
                   BorderThickness="0" Click="Close_Click"/>
-        </StackPanel>
+        </Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="10,30,10,10" MinWidth="330" Height="25">
                 <ComboBox Style="{DynamicResource ComboBoxStyle}" MinWidth="70" ToolTip="Access" Name="AccessCB"/>

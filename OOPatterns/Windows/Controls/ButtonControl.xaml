@@ -9,7 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="200" d:Name="Control">
     <Border BorderBrush="{DynamicResource ControlBorder}" BorderThickness="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ButtonControl}}, Path=BorderThickness}" Name="Border">
-        <StackPanel Background="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ButtonControl}}, Path=Background}" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Name="StackPanel">
+        <StackPanel Background="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ButtonControl}}, Path=Background}" 
+                    MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave" 
+                    MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" 
+                    MouseLeftButtonUp="StackPanel_MouseLeftButtonUp"
+                    Name="StackPanel">
             <Label Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ButtonControl}}, Path=Text}" 
                    FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ButtonControl}}, Path=FontSize}" 
                    Foreground="{DynamicResource PrimaryForeground}"

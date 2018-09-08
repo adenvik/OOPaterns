@@ -77,7 +77,10 @@ namespace OOPatterns.Windows.Controls
 
         private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
         {
-            (sender as StackPanel).Background = NormalBackground ?? (SolidColorBrush)TryFindResource("PrimaryButton");
+            var panel = sender as StackPanel;
+            panel.Background = NormalBackground ?? (SolidColorBrush)TryFindResource("PrimaryButton");
+            panel.BeginAnimation(OpacityProperty, null);
+            panel.Opacity = 1;
         }
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -88,16 +91,18 @@ namespace OOPatterns.Windows.Controls
                 To = 0.8,
                 Duration = TimeSpan.FromMilliseconds(100)
             };
+            (sender as StackPanel).BeginAnimation(OpacityProperty, fadeOut);
+        }
 
+        private void StackPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
             var fadeIn = new DoubleAnimation
             {
                 From = 0.8,
                 To = 1.0,
                 Duration = TimeSpan.FromMilliseconds(100)
             };
-            (sender as StackPanel).BeginAnimation(OpacityProperty, fadeOut);
             (sender as StackPanel).BeginAnimation(OpacityProperty, fadeIn);
-
             RoutedEventArgs args = new RoutedEventArgs(ClickEvent, this);
             RaiseEvent(args);
         }

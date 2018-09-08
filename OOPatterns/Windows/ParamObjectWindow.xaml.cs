@@ -2,6 +2,7 @@
 using OOPatterns.Core.InternalObject.ParamObject;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace OOPatterns.Windows
@@ -139,11 +140,7 @@ namespace OOPatterns.Windows
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                DragMove();
-            }
-            catch (Exception) { }
+            if (e.OriginalSource is Grid) DragMove();
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
